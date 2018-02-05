@@ -1,0 +1,280 @@
+﻿id,Summary,Description,Status,Priority,Milestone,Component,Version,Resolution,Created,Modified,Due Date,Reporter,Keywords
+35,Successfully import case into EPIC,Get a successful HL7 import from Copath to EPIC,assigned,blocker,,BD2K software development,,,"Aug 7, 2017, 12:05:13 PM","Feb 5, 2018, 11:10:01 AM",,wcampbel,
+48,"Segregate Synoptic Data, Laboratory tech preview and Nebraska Lexicon clinical data into three modules for international publication",,closed,blocker,Terminology Development,BD2K software development,,fixed,"Jan 5, 2018, 9:51:23 AM","Feb 5, 2018, 11:24:47 AM",,campbell,
+49,Hack-a-thon 2018,"2018 Hack-a-thon preparations.
+
+1.  Molecular data in the i2b2 data model
+2.  Synoptic data in the i2b2 model
+3.  Demonstrate new metadata developed by Jay/Yesh
+4.  Discuss dissemination to other GPC sites
+5.  Develop project to accomplish to demonstrate use of metadata to address useful data queries (see BD2K proposal for starting point-RCR work should be used)",new,blocker,,BD2K software development,,,"Jan 8, 2018, 11:51:37 AM","Feb 5, 2018, 11:20:11 AM",,wcampbel,
+53,Revise  SNOWOWL to 3 modules and reinstall,,closed,blocker,,BD2K software development,,fixed,"Jan 29, 2018, 11:05:45 AM","Jan 29, 2018, 11:11:20 AM",,campbell,
+9,"Develop procedures and protocols for i2b2 metadata: RXNORM, SNOMED CT, LOINC",Duplicates PCORI #387 and related,assigned,critical,Metadata,BD2K software development,,,"Feb 19, 2017, 12:24:35 PM","Feb 5, 2018, 11:27:57 AM",,campbell,
+27,NEO4J using HTTP versus HTTPS in PROD,"The login for NEO4J is not secured by HTTPS, but uses the default HTTP protocol which is less secure.  A protocol change to HTTPS should be considered, which would minimally require a SSL certificate.
+
+The current risk, would be that someone within the firewall could potentially attempt to monitor the login to NEO4J, and if successful, gain access to the NECARES/BD2K graph database.",closed,critical,NE CARES/Biobank Interactions,BD2K software development,,wontfix,"Jun 1, 2017, 1:43:28 PM","Jun 26, 2017, 11:11:37 AM",,jpedersen,
+50,Colorectal case analysis RCR stage 2,,new,critical,,BD2K software development,,,"Jan 26, 2018, 4:23:10 PM","Feb 5, 2018, 11:26:10 AM",,campbell,
+1,Colorectal Cancer Terminology Publication,"Development of publication materials for NLM
+-Cross ref old SCTIDs and New SCTIDs
+-Update CAP protocol worksheets",closed,major,Terminology Development,BD2K software development,,duplicate,"Feb 13, 2017, 1:02:54 PM","Feb 20, 2017, 11:53:36 AM",,wcampbel,
+2,Breast Cancer Terminology Publication,Finalize Breast Cancer Observable material for UMLS publication.,closed,major,Terminology Development,BD2K software development,,duplicate,"Feb 13, 2017, 1:04:31 PM","Feb 20, 2017, 11:54:03 AM",,wcampbel,
+3,Melanoma biopsy and resection Terminology,Publication of Melanoma content,closed,major,Terminology Development,BD2K software development,,fixed,"Feb 13, 2017, 1:05:35 PM","Dec 18, 2017, 4:00:30 PM",,wcampbel,
+4,Lung Cancer Worksheet,Development of Lung Cancer Content and publications,assigned,major,Terminology Development,BD2K software development,,,"Feb 13, 2017, 1:06:45 PM","Oct 23, 2017, 11:36:51 AM",,wcampbel,
+5,Load Gene Ontology into Protege,Load and classify GO in Neo4j for review,closed,major,Terminology Development,BD2K software development,,wontfix,"Feb 13, 2017, 1:07:52 PM","Feb 5, 2018, 11:58:40 AM",,jpedersen,
+6,NE BD2K Content Website Development,"Spec out, develop and publish NE BD2K content website for UMLS links, content distribution, knowledge sharing",assigned,major,Terminology Development,BD2K software development,,,"Feb 13, 2017, 1:09:04 PM","May 15, 2017, 11:34:34 AM",,wcampbel,
+7,Evaluate OMIM linkages,Evaluation of OMIM linkages with GO and developed observables,assigned,major,Terminology Development,BD2K software development,,,"Feb 13, 2017, 1:21:31 PM","Feb 19, 2017, 12:15:43 PM",,campbell,
+8,Bind Uniprot to GO and SNOMED CT,Bind Uniprot with GO and SNOMED CT in graphDB,new,major,Terminology Development,BD2K software development,,,"Feb 13, 2017, 1:22:17 PM","Feb 13, 2017, 1:22:17 PM",,campbell,
+11,Application development for NLM publication for SCTID generation,Develop renumbering application for RF2 file creation for SCTID's in NE Lex namespace for other site use.  Cross map (1 - 1) with LOINC codes,closed,major,Terminology Development,BD2K software development,,wontfix,"Feb 20, 2017, 11:36:26 AM","Apr 3, 2017, 11:32:53 AM",,jpedersen,
+12,Bone Marrow Synoptic,WSC/Tim Greiner.  TG provided final set of feeback for observable questions and value set requirement,new,major,Terminology Development,BD2K software development,,,"Mar 6, 2017, 11:27:14 AM","Jun 5, 2017, 9:58:45 AM",,wcampbel,
+13,Impose structure on micro results,"Review and structure micro results for consumption by Neo4j as staging area for i2b2.
+
+Culture and sensitivity data first.",new,major,Microbiology,BD2K software development,,,"Mar 6, 2017, 11:38:52 AM","Feb 5, 2018, 11:48:34 AM",,wcampbel,
+14,Get lab feed to one of BD2K VM instances.,Scott to get results data to BD2K VM instances.,closed,major,,BD2K software development,,fixed,"Mar 6, 2017, 11:40:55 AM","May 8, 2017, 11:40:49 AM",,wcampbel,
+15,Create landing zone for micro data,Develop Neo4j info model to receive parsed microdata.,closed,major,,BD2K software development,,fixed,"Mar 6, 2017, 11:41:46 AM","May 8, 2017, 11:45:16 AM",,wcampbel,
+16,Laboratory/LOINC ontology deployment,"Ready i2b2 for Lab/LOINC ontology deployment as metadata for laboratory result data.
+",closed,major,Metadata,BD2K software development,,duplicate,"Mar 6, 2017, 11:50:50 AM","Apr 3, 2017, 11:28:08 AM",,wcampbel,
+17,May XGM presentations,,closed,major,Microbiology,BD2K software development,,fixed,"Mar 10, 2017, 12:07:00 PM","May 8, 2017, 11:27:07 AM",,campbell,
+18,Fix TRAC attachment issue,Fix attachment issue in TRAC,closed,major,,BD2K software development,,fixed,"Mar 13, 2017, 11:57:04 AM","Mar 13, 2017, 3:04:34 PM",,jpedersen,
+19,Publications,Publication Plans for team,new,major,,BD2K software development,,,"Mar 13, 2017, 12:12:13 PM","Jan 29, 2018, 11:44:31 AM",,wcampbel,
+20,GUI development,Development of user interface for NE CARES,assigned,major,NE CARES/Biobank Interactions,BD2K software development,,,"Mar 13, 2017, 12:16:26 PM","Jan 22, 2018, 12:15:06 PM",,wcampbel,
+22,Conversion of NE CARES to new NE Lexicon numbering system,Update NE CARES SNOMED numbering.  Include existing encoded items,closed,major,NE CARES/Biobank Interactions,BD2K software development,,fixed,"Mar 20, 2017, 11:58:02 AM","Jun 5, 2017, 11:34:07 AM",,wcampbel,
+23,Annual NIH Report FY 2016,Due 5/1,closed,major,,BD2K software development,,fixed,"Mar 20, 2017, 12:00:04 PM","May 8, 2017, 11:41:20 AM",,wcampbel,
+24,Mirth app -- require Question and Answer codes to exist -- fail message if they do not,"The initial development of the Mirth Application for NECARES allowed for the question and answer SNOMED CT codes to not exist.
+
+When this occurred (missing question or answer node in SNOMED CT), the Observation node still existed and was attached to the Synoptic Report node.  However, there was no link to the actual SNOMED CT node for the question or answer.
+
+This was done because the creation of the worksheet codes was still in-progress.
+
+This should no longer be allowed, as the worksheet codes have been coded and are installed into the graph database.  It should probably cause the message processing to fail, as it indicates that the Synoptic Report message that was received has one or more invalid SNOMED CT question codes or answer codes.
+
+NOTE: these SNOMED CT question and answer codes are Nebraska Lexicon codes.",closed,major,NE CARES/Biobank Interactions,BD2K software development,,invalid,"Mar 29, 2017, 8:17:27 AM","Jul 10, 2017, 11:20:11 AM",,jpedersen,
+25,"Need backup of NECARES DEV, which contains TRAC and GIT source code repositories","The NECARES DEV machine is not currently being backed up.
+
+The Tickets and Wiki information within the TRAC systems which are housed on that machine (BD2K and i2b2, specifically) are not being backed up.
+
+The GIT repositories of source code for BD2K and i2b2 and NECARES and SNOMED_G are not being backed up.
+
+THere should be a periodic backup, likely nightly, for this information to RITO storage servers.",closed,major,NE CARES/Biobank Interactions,BD2K software development,,fixed,"Apr 28, 2017, 7:46:23 AM","Jul 25, 2017, 9:27:10 AM",,jpedersen,
+26,LOINC data ontology,LOINC ontology build and refinement,closed,major,Terminology Development,BD2K software development,,duplicate,"May 8, 2017, 11:44:55 AM","Oct 2, 2017, 12:44:21 PM",,campbell,
+28,Development of metadata dissemination and maintenance,Investigate and develop metadata dissemination and maintenance plans.  Includes design and development of load script utilities,assigned,major,Metadata,BD2K software development,,,"Jun 19, 2017, 11:12:34 AM","Jan 29, 2018, 11:46:48 AM",,wcampbel,
+29,Extracting synoptic report information for use in i2b2,"Using the MRN from the Patient node associated with SynopticReport nodes, create a set of i2b2 facts which document the pathologists answers that were recorded in filling out the Synoptic Report for a tumor.
+
+This requires design of the facts, and consideration of the metadata that will be needed to be able to use the facts in a meaningful fashion in i2b2.",assigned,major,,BD2K software development,,,"Jun 25, 2017, 11:16:05 AM","Feb 5, 2018, 11:45:57 AM",,jpedersen,
+30,Repair breast cancer synoptic and HL7 data,"HL7 data stream analysis demonstrates old UNMC SCTIDs that have been collapsed and converted.  Message archive needs to have SCTIDs converted to current tags.  Observables concept descriptions for estrogen receptor, progesterone receptor and HER2 are inconsistent with FSN and interface terminology and concept definitions need to be brought into alignment. Example:
+**822851121000004107**^Breast-**Prior** Estrogen receptor (ER) status^SCT
+",closed,major,Terminology Development,BD2K software development,,fixed,"Jun 29, 2017, 7:11:04 AM","Jan 8, 2018, 12:08:15 PM",,campbell,
+31,"Extract ""other"" responses from pathologists in Synoptic Reports","Create report which lists the free-text enetered by Pathologists in Synoptic Reports, when they answer ""Other"" for any of the questions.",closed,major,,BD2K software development,,fixed,"Jul 8, 2017, 11:45:38 AM","Jul 8, 2017, 11:49:10 AM",,jpedersen,
+32,Prepare NDC mapping tables for Capricorn,"Telephone call with Megan Patel(megan@mraia.org) and Capricorn node Cook County Hospital discussed metadata needs for medications and CDMV31.
+Deliverables:
+1) UNMC to deliver mapping tables from our resources linking Ingredient-NDC, SCD/BCD-NDC, NDC status and history
+2) Cook County to discuss deployemnt needs with their vendor Cerner and comment on utility of map tables
+3) Cook County to reconvene call to discuss in 3-4 weeks and decide if we want to approach Keith Marsolo and present plan to PCORNET",new,major,Metadata,BD2K software development,,,"Jul 13, 2017, 12:00:53 PM","Jan 29, 2018, 11:47:49 AM",,campbell,
+36,Database anomaly -- linkage of CasePart to Case missing from some CasePart nodes,"BOTTOM LINE
+
+We currently have 93 {{{CasePart}}} nodes in production which do not link directly to their associated {{{Case}}} node.
+
+The cause behind this needs to be identified.
+
+The symptom can be temporarily dealt with by adding a HAS_CASE_PART edge from the associated Case node to the CasePart node which is missing the edge.  But this would not prevent new instances of the problem from occurring.
+
+DETAILS
+
+CasePart SC17-1667-B is an example case which appears to be missing an edge to its associated Case node SC17-1667.  CYPHER:
+
+{{{
+match (cp:CasePart {casePartId: 'SC17-1667-B'}), (c:Case {caseId: 'SC17-1667'}) return c,cp
+}}}
+
+The current list of such CasePart nodes
+{{{
+[SC17-1667-B, SC17-1746-B, SC17-1760-B, SC17-1594-B, SC17-1441-B, SC17-1548-B, SC17-1638-B, SC15-5020-A, SC17-1545-A, SC17-1592-B, SC17-1659-A, SC17-1526-B, SC17-1304-C, SC17-1415-B, SC17-1328-A, SC17-1562-A, SC17-1174-A, SC16-4213-C, SC17-1380-B, SC17-1127-F, SC17-1265-A, SC17-1196-A, SC17-1063-A, SC17-867-B, SC17-981-A, SC17-1067-A, SC17-998-A, SC17-1213-B, SC17-915-B, SC17-772-B, SC17-1013-B, SC17-857-B, SC17-1062-A, SC17-944-B, SC17-842-B, SC17-869-B, SC17-875-A, SC17-765-A, SC17-732-B, SC17-498-B, SC17-745-A, SC17-616-A, SC17-651-B, SC17-620-A, SC17-133-B, SC17-539-B, SC17-1872-A, SC17-1877-A, SC17-524-B, SC17-535-A, SC17-1888-B, SC17-1839-A, SC17-1939-A, SC17-1775-A, SC17-1793-B, SC17-1875-B, SC17-2021-B, SC17-1870-B, SC17-1994-B, SC17-2004-B, SC17-2004-C, SC17-2172-B, SC15-4742-A, SC17-2119-B, SC17-2269-B, SC17-2268-A, SC17-2254-A, SC17-2371-B, SC17-2239-B, SC17-2419-A, SC17-2485-B, SC17-2501-B, SC17-2505-B, SC17-2546-B, SC17-2729-B, SC17-2646-B, SC17-2663-B, SC17-2723-D, SC17-2816-A, SC17-2747-C, SC17-2841-A, SC17-2826-B, SC17-2901-A, SC17-2917-A, SC17-2843-A, SC17-2930-A, SC17-2889-B, SC17-2966-B, SC17-2649-B, SC17-2987-A, SC17-3077-A, SC17-3004-B, SC17-3130-B]
+}}}
+
+How was this list determined?
+
+The following query executed on Aug 11 at 11:45 am, found 93 CasePart nodes which did not appear to have an edge to a case node.
+
+{{{
+MATCH (sr:SynopticReport)<--(:CasePart)<--(:Case)
+with collect (distinct sr.casePartId) as sr_casePartIds_path
+MATCH (sr:SynopticReport)
+with sr_casePartIds_path, collect(distinct sr.casePartId) as sr_casePartIds
+with filter(id in sr_casePartIds where not id in sr_casePartIds_path) as missing_by_path, sr_casePartIds, sr_casePartIds_path
+return size(missing_by_path), missing_by_path,  size(sr_casePartIds), size(sr_casePartIds_path)
+}}}
+
+If the query is changed to not look for the Case node, then it finds no missing elements.
+
+{{{
+MATCH (sr:SynopticReport)<--(:CasePart)
+with collect (distinct sr.casePartId) as sr_casePartIds_path
+MATCH (sr:SynopticReport)
+with sr_casePartIds_path, collect(distinct sr.casePartId) as sr_casePartIds
+with filter(id in sr_casePartIds where not id in sr_casePartIds_path) as missing_by_path, sr_casePartIds, sr_casePartIds_path
+return size(missing_by_path), missing_by_path,  size(sr_casePartIds), size(sr_casePartIds_path)
+}}}
+
+
+
+",closed,major,,BD2K software development,,fixed,"Aug 11, 2017, 12:00:49 PM","Aug 21, 2017, 11:13:12 AM",,jpedersen,
+37,GenomeOnc data import,"Reporting of molecular path data to graph via HL7, JSON",assigned,major,,BD2K software development,,,"Aug 14, 2017, 11:56:43 AM","Feb 5, 2018, 11:30:24 AM",,wcampbel,
+39,Update NE Lexicon codes in NECARES PROD (NEO4J Graph),"We need to load the latest NE Lexicon full release into TEST and PROD.
+It has all the necessary {{{ObjectConcept}}} codes to support NEC_Meta nodes.
+
+Location in BOX:
+{{{
+SNOMED_CT_release files\SnomedCT_Release_INT_20170825-0908.zip
+}}}
+",closed,major,NE CARES/Biobank Interactions,BD2K software development,,fixed,"Aug 28, 2017, 12:47:56 PM","Sep 20, 2017, 1:51:54 PM",,jpedersen,
+40,Prepare for international release of NE Lexicon,Prepare for international release of NE Lexicon.  This includes moduleId dependencies.,assigned,major,,BD2K software development,,,"Oct 23, 2017, 1:51:20 PM","Jan 29, 2018, 11:45:46 AM",,wcampbel,
+41,Nodes in PROD NEO4J which are missing de-identifiers,"MISSING DE-IDENTIFIER CASES:
+
+After applying post-processing to distribute de-identifiers, the PROD DB was examined to look for nodes that were still missing de-identifiers.
+
+THere was one case that appeared to be added (by Mirth) after I distributed the de-identifiers.  The associated nodes for that case are missing de-identifiers.  This makes sense to me as we haven't updated the automated processing (mirth) to add the de-identifiers in PROD.
+
+Additionally ...
+
+The only other issue I saw was for ParaffinSpecimen nodes,
+for which you can not always find Case nodes or Patient nodes.
+
+Possible fix for ParaffinSpecimen case:
+
+We could potentially create 'sparse' Patient and Case nodes
+for these cases -- with just the key fields (eg. patientId, caseId).  This is what we previously discussed doing.
+",closed,major,,BD2K software development,,wontfix,"Nov 7, 2017, 5:19:23 PM","Nov 8, 2017, 2:44:28 PM",,jpedersen,
+42,GUI -- duplicate results returned in case diagnosis queries,"== CYPHER (generic algorithm for case diagnosis) ==
+{{{
+match (a:ObjectConcept) WHERE a.id IN ['911753691000004109']                                                            with a
+match (a)-[:NEC_META*]->(b:ObjectConcept)                                                                              with  [a.sctid]+collect(distinct b.sctid) as allids
+optional match (b:ObjectConcept)-[:ISA*]->(c:ObjectConcept {sctid:'363787002'}) where b.sctid in allids
+with  allids, collect(distinct b.sctid) as p0_questions
+with  allids, p0_questions, filter(id in allids where not id in p0_questions) as p0_answers
+optional match (so:SynopticObservation)<-[:HAS_OBSERVATION]-(sr:SynopticReport), (p:Patient)-->(c:Case)-->(cp:CasePart)-->(sr)
+where (
+(so.questionId in p0_questions and so.answerId in p0_answers)
+) AND p.patientDeid is not null
+with p0_questions, p0_answers,  so, sr, p, c, cp
+optional match (c)-[:HAS_INVENTORY]->(:CaseInventory)-->(ps:ParaffinSpecimen)
+optional match (qOC:ObjectConcept {sctid:so.questionId}) optional match (aOC:ObjectConcept {sctid:so.answerId}) optional match (opt:ObjectConcept {sctid:ps.partType}) with p0_questions, p0_answers,  so, p, c, cp, ps,
+{ questionId: so.questionId, answerId: so.answerId, patientDeid: p.patientDeid, caseDeid: c.caseDeid, casePartDeid: cp.casePartDeid, partType: opt.FSN,
+TsfBlockDeid: ps.TsfBlockDeid, ps_partType: ps.partType, ps_diseased: ps.diseased, questionText: qOC.FSN, answerText: aOC.FSN } as or_result1
+with p0_questions, p0_answers,
+collect(or_result1) as or_result
+with or_result,
+extract(x in filter(x in or_result where x.questionId in p0_questions and x.answerId in p0_answers) | x.patientDeid) as p0_patients
+ 
+with or_result,
+  p0_patients  as target_patients
+with extract(x in filter(x in or_result where x.patientDeid in target_patients) | x) as result_coll
+unwind result_coll as result
+return result.questionId As QuestionID, result.questionText AS Question, result.answerId AS AnswerID, result.answerText As Answer, result.patientDeid AS PatientID, result.caseDeid AS CaseID, result.casePartDeid as CasePartID, result.partType as PartType, result.ps_diseased as Diseased order by result.questionId, result.answerId
+}}} 
+ 
+== Example Problem Result (containing duplicate records) ==
+{{{
+Malignant Brain
+QuestionID         Question             AnswerID            Answer PatientID             CaseID  CasePartID          PartType                Diseased
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           4590003                ""Adenocarcinoma            metastatic (morphologic abnormality)"" 100470  100470  101478  Tissue specimen from brain (specimen)              Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           4590003                ""Adenocarcinoma            metastatic (morphologic abnormality)"" 100470  100470  101478  Tissue specimen from brain (specimen)              Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           64204000                ""Squamous cell carcinoma            metastatic (morphologic abnormality)"" 100469  100469  101477  Tissue specimen from brain (specimen)               Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           64204000                ""Squamous cell carcinoma            metastatic (morphologic abnormality)"" 100469  100469  101477  Tissue specimen from brain (specimen)               Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           64204000                ""Squamous cell carcinoma            metastatic (morphologic abnormality)"" 100469  100469  101477  Tissue specimen from brain (specimen)               Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           64204000                ""Squamous cell carcinoma            metastatic (morphologic abnormality)"" 100469  100469  101477  Tissue specimen from brain (specimen)               Y
+911753691000004109     Histologic type of malignant neoplasm of brain (observable entity)           64204000                ""Squamous cell carcinoma            metastatic (morphologic abnormality)"" 100469  100469  101477  Tissue specimen from brain (specimen)               Y
+}}}
+",closed,major,,BD2K software development,,duplicate,"Nov 8, 2017, 10:48:33 AM","Nov 8, 2017, 2:47:03 PM",,jpedersen,
+43,SCILHS Medications -- add historical RXCUI codes received from NLM in Oct 2017,"Our current SCILHS Medications has a coverage of approximately 85% of the RXNORM (aka RXCUI) codes used in UNMC's i2b2 database.
+
+We have received a ""complete historical set of RXCUI codes"" in Oct 2017 from the NLM, which includes the RXCUI code, descriptive text, its type (ingredient versus generic drug versus branded drug, etc), and its current status (active versus retired).
+
+We need to use this information to make the RXNORM code coverage for orderable drugs be historically complete in our SCILHS MEDICATIONS metadata.",closed,major,,BD2K software development,,duplicate,"Nov 13, 2017, 10:20:49 AM","Dec 8, 2017, 11:51:49 AM",,jpedersen,
+44,"SCILHS Diagnoses -- update SNOMED CT from NE Lexicon of Nov 13, 2017 -- US release 2017 0901","An RF2 extract from SNOWOWL was created on Nov 13, 2017, which included the SNOMED CT US Sep 2017 Edition.
+
+This must be incorporated into the SCILHS Diagnosis metadata in UNMC's i2b2, and a CSV file with the metadata must be provided in the BOX location for SCILHS metadata CSV files.",closed,major,,BD2K software development,,duplicate,"Nov 14, 2017, 12:56:34 PM","Jan 8, 2018, 11:32:59 AM",,jpedersen,
+45,Ontology of locations,An ontology of locations of care matching those in i2b2 needs to be established for work on antibiogram efforts,assigned,major,Microbiology,BD2K software development,,,"Dec 1, 2017, 2:57:59 PM","Feb 2, 2018, 8:46:37 AM",,wcampbel,
+46,NEO4J Training -- list of questions,"In preparation for NEO4J Advanced Bootcamp training, a list of questions which are of interest are being collected in this ticket (as comments).",closed,major,,BD2K software development,,fixed,"Dec 6, 2017, 10:11:11 AM","Dec 18, 2017, 11:19:03 AM",,jpedersen,
+47,"Maintenance discussion for Meds, SNOMED and LOINC",Plan maintenance activities for updating standard terminologies and forming into metadata.,new,major,Metadata,BD2K software development,,,"Dec 18, 2017, 11:48:18 AM","Dec 18, 2017, 11:48:18 AM",,wcampbel,
+51,Lab results are not all LOINC coded,,new,major,,BD2K software development,,,"Jan 28, 2018, 6:10:19 PM","Feb 5, 2018, 11:35:02 AM",,campbell,
+52,Share metadata resources with Mayo,"Python Code for SNOMED CT deployment to metadata: Diagnoses, Procedures, etc
+RF2 dataset for Nebraska Lexicon SNOMED extension
+Maps from SNOMED CT to LOINC
+
+
+Harold Solbrig to Everyone
+https://github.com/BD2KOnFHIR/i2FHIRb2",new,major,,BD2K software development,,,"Jan 29, 2018, 10:56:33 AM","Feb 5, 2018, 11:38:29 AM",,campbell,
+10,NLM Publication of Terminology of Colorectal and Breast Cancer,Publication of Colorectal and Breast Cancer observable and value sets per CAP worksheets,closed,minor,Terminology Development,BD2K software development,,fixed,"Feb 20, 2017, 11:24:32 AM","Jul 31, 2017, 11:41:40 AM",,wcampbel,
+21,File attachments are limited to 256 kb,Tried to upload draft of release notes for discussion and could not attach 445 kb file,closed,minor,,BD2K software development,,fixed,"Mar 20, 2017, 7:18:24 AM","Mar 20, 2017, 1:55:18 PM",,campbell,
+33,"Graph -- investigate using the standardized bolt driver instead of py2neo, in python code","We currently use the ""py2neo"" python library in our python code to perform graph operations like creating or updating the SNOMED CT core within an NECARES graph. This library is not maintained by NEO4J.
+
+  http://py2neo.org/v3/
+
+As of NEO4J 3.0, the NEO4J team itself has created and supports a python library for access NEO4J graphs known as ""neo4j-python-driver"".  This is what they reference at the official site (they previously referenced ""py2neo"", among other libraries).
+
+  http://neo4j.com/docs/api/python-driver/current/
+  https://github.com/neo4j/neo4j-python-driver
+
+The library is called ""The Official Neo4j Driver for Python supports Neo4j 3.0 and above and Python versions 2.7, 3.4, 3.5 and 3.6."".
+
+It likely makes sense to modify our code to use ""The Official Neo4j Driver for Python"" instead of py2neo.  It will surely enjoy better support as NEO4J itself is maintaining it.
+
+",closed,minor,,BD2K software development,,duplicate,"Jul 22, 2017, 6:43:15 AM","Nov 8, 2017, 2:57:00 PM",,jpedersen,
+34,"Graph creation software - error detection for NEO4J issues, python 3 support","The code that creates the SNOMED CT core can be improved by the following
+
+#1. Validate that the interface to NEO4J is working,
+    and specifically that LOAD CSV commands will work.
+
+Currently, if there is a NEO4J issue ... it is not determined until a lot of work has already been done (creation of CSV files and CYPHER files).
+
+It would be better to ensure that NEO4J access is working up-front, rather than generate an error after a significant amount of time.
+
+#2. Support python version 3 (currently only supports python version 2.7)
+
+The effort for these items is low to medium, less than a day for the first and perhaps two days for the second.
+
+#3. Ensure that all errors that occur are logged in build.log
+
+If the LOAD CSV command fails, the reason for the failure needs to be logged in build.log so a user can use that to inform them of the exact problem that is occurring.
+",closed,minor,,BD2K software development,,duplicate,"Jul 31, 2017, 8:50:18 AM","Nov 8, 2017, 2:54:19 PM",,jpedersen,
+38,Update NEO4J to 3.2.2 in PROD and TEST from 3.0.7,"We currently have NEO4J 3.2.2 in NECARES DEV, but 3.0.7 in NECARES PROD and TEST.
+
+NEO4J 3.2.2 is the current NEO4J software with reportedly significant improvements in query performance.
+
+This ticket documents the procedure for installing NEO4J 3.2.2, with a fallback procedure of restoring NEO4J 3.0.7 if needed.
+
+--------- INSTALLATION PROCEDURE  -----------------
+
+This would have to be done off-hours, but is a matter of the following:
+{{{
+  #1. install NEO4J 3.2.2 on the machine
+         (creating /opt/neo4j-community-3.2.2)
+  #2. configure NEO4J appropriately (conf/neo4j.conf file will need changes)
+        (a) /opt/neo4j-community-3.2.2/conf/neo4j.conf
+            Use configuration options similar to what is on DEV which is running 3.2.2.
+  #3. update the system startup to start version 3.2 instead of 3.0.7
+        (a) file /sno/scripts/start_neo4j.bash
+        (b) change
+              /opt/neo4j-community-3.0.7/bin/neo4j start 
+            to
+              /opt/neo4j-community-3.2.2/bin/neo4j start 
+  #4. restart system, which
+        (a) tests the startup of NEO4j 3.2.2
+        (b) causes the database format to upgrade to 3.2.2 format
+}}}
+
+------------ FALLBACK (BACKOUT PROCEDURE) --------------------
+
+If there is an issue, the NEO4J 3.0.7 software will still exist on the machine.
+We could recover by restoring the backup and re-establishing NEO4J 3.0.7 as the
+software to start on system startup.
+{{{
+  #1. shut down NEO4J
+  #2. restore the NEO4J database from 2:00 am backup
+         the backup is in /sno/backup/NECARES_<YYYYMMDD>.tar.gz
+         which needs to be restored to /sno/neo/databases/necares_sno20170331
+  #3. modify the /sno/scripts/start_neo4j.bash to start NEO4J 3.0.7 (system startup)
+         /opt/neo4j-community-3.0.7/bin/neo4j start
+  #4. restart NEO4J
+         -- will start neo4j 3.0.7 using the restored database in 3.0.7 format
+}}}
+",closed,minor,NE CARES/Biobank Interactions,BD2K software development,,duplicate,"Aug 18, 2017, 1:05:05 AM","Nov 8, 2017, 2:59:19 PM",,jpedersen,

@@ -1,0 +1,2061 @@
+﻿ticket,time,author,field,oldvalue,newvalue
+3,13:06:02-06:00,wcampbel,comment,1,WSC to load content into Copath.
+5,13:20:22-06:00,wcampbel,type,defect,task
+5,13:20:22-06:00,wcampbel,reporter,wcampbel,jpedersen
+5,13:20:22-06:00,wcampbel,comment,1,
+5,09:46:24-06:00,jpedersen,comment,2,"Investigating the use of an open-source JAVA program to load an OWL file into NEO4J.
+
+https://github.com/flekschas/owl2neo4j
+
+Another possibility is the apache JENA package, also java-based, which works with ontologies and appears to be able to create graph structures from ontology definitions.
+
+https://jena.apache.org/documentation/ontology/
+
+"
+7,12:15:43-06:00,campbell,status,new,assigned
+7,12:15:43-06:00,campbell,owner,wcampbel,campbell
+7,12:15:43-06:00,campbell,comment,1,
+9,12:27:32-06:00,campbell,comment,1,"Analysis of content and organization new metadata rxnorm_unmc_jgp
+RXNORM 29823 
+(includes 6258 not in 2015 metadata mostly active concepts)
+(3745 under VA and not ATC; 2554 under ATC and NOT VA)
+(of RXNORM records in use at Nebraska, 874 under VA and NOT ATC; 281 under ATC and not VA
+NDC 453729 
+(includes 76938 not in current metadata)
+(5709 under ATC and NOT VA; 23042 under VA and NOT ATC) 
+(of NDC records in use at Nebraska, 1041 under VA and NOT ATC; 73 under ATC and NOT VA)
+
+UNMC metadata current
+RXNORM 27279 (includes 3714 not in new metadata apparently retired) 
+NDC 382361  (includes 5570 not in new metadata)
+"
+4,12:29:39-06:00,campbell,status,new,assigned
+4,12:29:39-06:00,campbell,owner,wcampbel,campbell
+4,12:29:39-06:00,campbell,comment,1,"2/18/17 SNOMED CT content modeled completely, work filed in updated BOX folder"
+2,12:31:23-06:00,campbell,comment,1,2/18/17 Revisions to 2 Observables to maintain consistency within SNOMED CT 
+9,12:48:03-06:00,campbell,comment,2,"2/19/17
+TO Jeff Klann,
+We are nearly complete occur within th on an expanded i2b2 metadata for dugs which has a (nearly) complete history of RXNORM and NDC.  I want to deploy your medication modifiers but we are going to need to support some additional elements to support all of our use cases.  In particular, your modifiers identify RX_BASIS of dispensing and prescribing.  I suggest we need to cover administration events as well.  Dispense events may be from a pharmacy external to the institution, or occur within the inpatient (hospital) pharmacy for patients in-house.  Prescriptions are generally descriptive of orders to the external pharmacies but I notice that you add a subtype which appears to be the in-clinic order to the nurse for administration.  
+
+I assume that you link the order detail of frequency, days supply, quantity and refills to the RX_basis fact via the instance_num? 
+
+I can suggest extensions to your modifier set for the additional use cases but I need your direction as to how we can cover these other use cases not necessarily required for CDMV3.
+Jim
+"
+5,11:11:28-06:00,wcampbel,comment,3,Jay completed import of 'ISA' relationships using the OWL format.  Will work on refining import scripts to address other relationships using OWL API and Neo4j
+9,11:15:51-06:00,wcampbel,cc,,"campbell, wcampbel"
+9,11:15:51-06:00,wcampbel,milestone,,Metadata
+9,11:15:51-06:00,wcampbel,comment,3,"RxNorm metadata creation procedures and algorithms.  Added new drug hierarchy (VA) to metadata creation.  Code all documented in i2b2 WIKI.
+
+Historical NDC codes present, but historical RxNorm codes to be added.  
+
+What is best strategy for RxNorm temporality."
+3,11:19:28-06:00,wcampbel,comment,2,"JRC completed SNOMED CT for Melanoma.  Submitted to LOINC with revisions.
+
+WSC to load into Copath.
+JGP to load new codes into NE CARES this week.  WSC and JGP to discuss plan."
+4,11:21:45-06:00,wcampbel,comment,2,JRC completed SNOMED CT encoding.  WSC to review with pathology and develop Copath rendition.
+10,11:28:56-06:00,wcampbel,comment,1,"JRC QA breast and colorectal terminology in light of current observables direction/documentation.
+
+WSC created cross map for OLD NE Lex to NEW NE Lex (numbering) and LOINC in folder four, mater excel worksheets."
+6,11:32:32-06:00,wcampbel,comment,1,"WSC engaged.  Pathology will provide website for now.  Specs for site to be finalized this week with WSC and JRC.
+
+1) Known spec.  Download content requires UMLS user authentication.  Scripts sent to IT for review."
+11,11:37:37-06:00,wcampbel,comment,1,Discuss range of NE Lex ids for use...ongoing use for LOINC mapping.  Analyze current use and how b2i is assigning ids now.
+10,11:47:50-06:00,wcampbel,comment,2,WSC to expand LOINC maps in SnowOwl.
+10,11:52:25-06:00,wcampbel,type,defect,task
+10,11:52:25-06:00,wcampbel,comment,3,
+1,11:53:36-06:00,wcampbel,status,new,closed
+1,11:53:36-06:00,wcampbel,resolution,,duplicate
+1,11:53:36-06:00,wcampbel,comment,1,
+2,11:54:03-06:00,wcampbel,status,new,closed
+2,11:54:03-06:00,wcampbel,resolution,,duplicate
+2,11:54:03-06:00,wcampbel,comment,2,
+9,13:29:53-06:00,campbell,comment,4,"Jay
+I think we need to build a history file of our own from Oliviers dump to supplement for future loads:
+RXCUI|STR|IN|current|
+351399|Prednisone 5mg oral tablet (Prednicot)(052006_112016)|8640||….
+That we will process with each build to add the historical concepts.
+If the concept has a current equivalent, we should create a folder for SBD/SCD/BPCK/GPCKs and add the current and historical concepts as children.
+
+I want to eliminate ATC from the build we distribute and include all RXNORM in the ATC hierarchy that are not in the AV hierarchy.  I have attached a worksheet with those codes and their appearance in ATC.  We should build records for them linking to their ingredient and tie them into the VA hierarchy where the RXNORM for the ingredient exists.  All others should be tied to the N000029593 MISCELLANEOUS AGENTS section of the VA hierarchy so that the VA scheme will have all drugs
+Jim
+
+SQL I used to pull ATC codes not in the VA hierarchy:
+with VA_RXNORMCODES(CODE) AS
+(
+SELECT DISTINCT C_BASECODE
+FROM RXNORM_UNMC_JGP
+WHERE C_BASECODE LIKE 'RXNORM:%'
+AND C_FULLNAME LIKE '\JPMed\ATC\%'
+),
+ATC_RXNORMCODES(CODE) AS
+(
+SELECT DISTINCT C_BASECODE
+FROM RXNORM_UNMC_JGP
+WHERE C_BASECODE LIKE 'RXNORM:%'
+AND C_FULLNAME LIKE '\JPMed\VA%'
+),
+ATCBUTNOTVA(CODE) AS
+(
+SELECT * FROM ATC_RXNORMCODES
+MINUS
+SELECT * FROM VA_RXNORMCODES
+)
+SELECT *
+FROM ATCBUTNOTVA A
+JOIN RXNORM_UNMC_JGP R ON A.CODE = R.C_BASECODE
+"
+6,17:18:16-06:00,wcampbel,status,new,assigned
+6,17:18:16-06:00,wcampbel,comment,2,Specs development document and diagram created.  Routed to all team members.
+9,11:06:37-06:00,wcampbel,comment,5,"Jay worked on metadata load procedures for SCHILS information model and RxNorm.
+
+Agreement on modifier layer between JRC and JGP ongoing."
+10,11:13:37-06:00,wcampbel,comment,4,"Full RF2 NE Lexicon and Snowowl files sent to b2i.  DB backup also included  They acknowledged receipt today.  Waiting on their estimated response time.
+
+Jay started some outline of distribution applet.  LOINC to SCTID refset for techpreview concepts already exists.  WSC to complete LOINC to Cancer concept refset mapping this week.  WSC final mark up of CAP protocols to be published. "
+6,11:20:00-06:00,wcampbel,comment,3,"UMLS linkage.  WSC still working with UNMC IT to get UMLS handshake.
+
+PC and WSC to discuss."
+11,11:21:01-06:00,wcampbel,comment,2,Jay working on this python program.  NE Lexicon safe number region identified.
+3,11:24:28-06:00,wcampbel,comment,3,WSC to load Copath including value sets.  Then production.
+4,11:25:45-06:00,wcampbel,comment,3,"AP/MP almost complete for observables.
+
+JRC/WSC to meet with Julie Bridge re: FISH.  WSC to validate content with Jim Wisecarver with feedback to JRC."
+10,11:52:59-06:00,wcampbel,comment,5,"Generate release notes.
+
+1)  WSC to get marked up CAP worksheets
+2)  Jay ""how to"" run python
+3)  JRC - ontology and definitions employed.
+4)  JRC/WSC content and scope of release"
+16,11:45:04-05:00,campbell,status,new,assigned
+16,11:45:04-05:00,campbell,owner,wcampbel,campbell
+16,11:45:04-05:00,campbell,comment,1,
+17,11:45:49-05:00,campbell,status,new,assigned
+17,11:45:49-05:00,campbell,owner,wcampbel,campbell
+17,11:45:49-05:00,campbell,comment,1,
+14,11:50:41-05:00,wcampbel,comment,1,WSC to check use of RPS feed.
+9,11:52:28-05:00,wcampbel,comment,6,Jay to review RxNORM instance with JRC.  JRC to review Jay's work and set direction/next steps
+12,11:53:36-05:00,wcampbel,comment,1,WSC to get FSN to JRC by early next week.
+16,11:54:47-05:00,wcampbel,comment,2,"a) assembling ref set for SCHILS deployment
+
+b) tailoring ontology build on SNOWOWL."
+13,11:55:58-05:00,wcampbel,comment,1,"WSC to get organism table, drug table, and test performables from Kathy Ubben for encoding."
+4,11:58:42-05:00,wcampbel,comment,4,"JRC/WSC to review in light of RII issues
+
+WSC to set up meeting with JRC and Julia Bridge for FISH discussion"
+10,12:08:23-05:00,wcampbel,comment,6,"1)  WSC to meet with Dan Moser to validate UMLS testing and NLM handshake/redirect
+
+2)  WSC/JRC to validate and secure all LOINC codes to be included in release.
+
+3)  JGP to have numbering wheel codeset by end of this week.
+
+4)  JRC draft documentation
+    a) python how to
+    b) WSC to complete CAP worksheet markup
+    c) WSC to get legal-speak disclosure for SNOMED, LOINC and CAP 
+    
+5)  Publicity
+    a)  RII concerns?
+    b)  Dan Karlsson - can IHTSDO reference this work?
+    c)  CAP to reference work.
+"
+17,12:10:58-05:00,wcampbel,comment,2,Slide sets due 4/3/2017.
+19,12:15:25-05:00,wcampbel,comment,1,"1)  Jay to work on slides for Spring AMIA by midweek for clan review.  Trial review on Friday at at 9am meeting
+
+2)  WSC slides for spring AMIA by 3/26
+
+3)  Wonky wanderings to be discussed by WSC/JRC this week.
+     a) Diagram work, too
+
+4)  WSC started molecular pathology flow paper.  To review with JRC and CAP coauthors this week."
+20,12:16:58-05:00,wcampbel,comment,1,"WSC, JGP and PC to discuss action plan for development Tuesday."
+18,12:18:22-05:00,wcampbel,owner,jay.pedersen,yeshwanth.narayana@unmc.edu
+18,12:18:22-05:00,wcampbel,description,,Fix attachment issue in TRAC
+18,12:18:22-05:00,wcampbel,comment,1,
+18,15:03:09-05:00,jpedersen,comment,2,"Issue was an installation issue.  The TRAC files needed to be owned by www-data, the username used by the apache web server.  The files were owned by root previously.
+
+Once the files were changed to be owned by www-data, and the apache server was restarted, then the 'attach file' method appeared to work."
+18,15:03:28-05:00,jpedersen,status,assigned,closed
+18,15:03:28-05:00,jpedersen,resolution,,fixed
+18,15:03:28-05:00,jpedersen,comment,3,
+18,15:04:34-05:00,jpedersen,comment,4,"The following was found by Yeshwanth that indicated the issue at hand:
+
+http://stackoverflow.com/questions/23870808/oserror-errno-13-permission-denied"
+17,10:45:12-05:00,campbell,comment,3,We have two presentations scheduled for Epic XGM May 2nd and 3rd
+20,11:16:42-05:00,wcampbel,comment,2,"Focus on Harvest, reporting.  Extended work plan this week.
+
+RITO - to have LDAP functional by 3/25"
+12,11:19:47-05:00,wcampbel,comment,2,"WSC - meeting with Greiner to get FSN's and copath layout completed.  Today, 3/20"
+14,11:21:59-05:00,wcampbel,comment,2,WSC - working with Lisa Bazis to get feed to pathology database
+9,11:31:56-05:00,wcampbel,comment,7,"JRC to get modifiers installed today.  Continue to debug with hierarchies vs. ingredients for RxNorm.  Get uploaded to Babel.
+
+JRC to meet with Hubert on 3/21.  With stated relationships, take subset of shared lab codes between NYU and UNMC and build metadata using that subset of codes."
+10,11:48:59-05:00,wcampbel,comment,7,"JRC finalizing LOINC-SCTID map for NE Lexicon.  Reviewing descriptions file for definitional edits.
+
+JGP to trial run RF2-m codes.  Check for LN-SCT tech preview map.
+
+Load CAP LN into snowowl ref set.
+
+WSC to call AJCC for any granular issues re observables.
+
+WSC to mark up CAP documents for breast and colorectal with final LOINC codes/value sets.  Will follow CAP guidance received from Ted Carithers.
+
+Target end of week for exposure on UMLS.
+
+Release notes almost completed by JRC.
+
+To do's
+Finalize classified version in SO
+RF2
+Simple map refset
+Modified RF2 with LN substitution
+Finalize file names and harmonize with release notes
+Mark up CAP documents
+NLM, RII and CAP 36 hour period of review
+Post to website"
+19,12:04:34-05:00,wcampbel,comment,2,"JGP has first round of slides.  Present tomorrow at tech meeting.
+
+"
+4,12:05:10-05:00,wcampbel,comment,5,Wisecarver update this week
+17,12:06:42-05:00,wcampbel,comment,4,JRC to upload abstracts today
+21,12:07:13-05:00,wcampbel,comment,1,Yesh to review file size restriction today
+11,12:18:42-05:00,wcampbel,comment,3,No need for this SCTID renumber issue.  LOINC codes to replace NE Lexicon SCTID's in RF2 files
+21,13:55:18-05:00,yeshwanth.narayana,status,new,closed
+21,13:55:18-05:00,yeshwanth.narayana,resolution,,fixed
+21,13:55:18-05:00,yeshwanth.narayana,comment,2,"Changed the maximum file limit size in the trac configuration files(bd2k, necares, i2b2) to 5MB. 
+Now we can add attachments up to 5MB in all the three projects."
+10,13:27:22-05:00,campbell,comment,8,"Release notes updated to include file structures, acknowledgements and description of use.  WSC and JGP to kindly review.  Check out file and edit for obvious changes you want to make.
+JRC"
+10,13:28:48-05:00,campbell,cc,Campbell,"Campbell, wcampbel@unmc.edu, jay.pedersen@unmc.edu"
+10,13:28:48-05:00,campbell,comment,9,Please comment and edit release notes
+10,12:26:51-05:00,campbell,comment,10,"Work items for finalization of publication:
+1) Expand LOINC map refset to include all tech preview plus all mapped items from pathology
+2)JRC to edit FSn/PT for Neb Lexicon descriptions to eliminate errors
+3) JGP to substitute LOINC code for all mapped SNCTIDs in concepts, descriptions, relationships AND map refset  - yielding refset with redundant LOINC code entries subsetting terminology release in lOINC
+4) JGP to delete simple LOINC map (about 25 terms) from release set
+5) JGP and WSC to review and edit release notes draft
+) WSC to do final edits on PDFs of Cancer Protocols
+6) Finalize publicity plans
+7) JRC to Finalize release notes and review final PDFs for publication"
+9,12:32:57-05:00,campbell,comment,8,"If RxNorm metadata passes numeric checks, JRC to complete load of prescriptions and dispense events, run fact counts
+JGP to publish to BABEL for comment
+JGP to fork Harvard release and publish to SCILHS website
+
+YA to draft LOINC frequent use ontology
+JRC to solicit any LOINCV code additions to 'frequent use' subset from Harvard
+
+JGP to schedule CONDITIONS build with SNOMED CT for SCILHS DIAGNOSIS metadata"
+17,12:34:20-05:00,campbell,comment,5,"Note sent to Vikas Biliyar(Epic) explaining that we have accomplished little with microbiology
+
+Slides due for presentations April 4."
+12,11:10:00-05:00,wcampbel,comment,3,Scott has built Bone Marrow per Greiner.  Tim to review before move into Copath.  Terminology building to follow.
+15,11:10:54-05:00,wcampbel,comment,1,Waiting on Brian Lancaster/Lisa Bazis to approve feed from RPS
+20,11:13:16-05:00,wcampbel,comment,3,"Phil/Yesh/Jay - meet with Chanikya and Ashok to bind LDAP to current Meteor worksheets.
+
+In meeting, they will validate if RITO will only manage system access, or if they will also manage user privileges.
+
+Functional security/login to dev by end of week.  Target to get log in to Production this week, too."
+6,11:16:33-05:00,wcampbel,comment,4,"Need to get final set of files to include in upload set.
+
+-Release notes
+-CAP notes
+-RF2 files
+
+Send files to Dan Moser."
+10,11:53:41-05:00,wcampbel,comment,11,"WSC to confirm LOINC mapping with copy given to Jay
+
+2)  JRC to continue FSN edits
+3)  JGP has code completed, but needs item from #1 to complete.  Waiting on WSC
+4)  JGP, understood
+5)  In process
+6)  NLM list serve, CAP, RII?, SNOMED International?
+6a)  UNMC via UNEMED and updated website"
+9,12:16:34-05:00,wcampbel,comment,9,"1)  Get fact counts complete
+2)  Yesh to follow up on NE codes with frequency > 100"
+10,14:57:49-05:00,wcampbel,comment,12,"WSC uploaded edited LOINC mapping table.  JRC, please review highlighted items."
+10,14:32:59-05:00,wcampbel,comment,13,"Jim, I reviewed the Release notes, and they look fine.  I did make a few typo corrections and reviewed the CAP copyright section closely.
+
+I also added Alexis Carter into the acknowledgement section.  I think this is good to go.
+
+I only need to complete the hyperlinks in the updated PDFs."
+10,09:36:29-05:00,campbell,comment,14,"I reviewed the LOINC maps that Scott flagged and validated the list of 147 pathology observables
+in spreadsheet Pathology_Observables_LOINCMaps_20170401.xlsx which I just uploaded.  Use the 
+worksheet LOINCMAO_final for the observables maps to be added to the tech preview and for use 
+in creating the LOINC code substitutions into RF2 data sets for our NLM publication.
+
+I revised the Observables FSNs that were ambiguous and have created a new RF2 release set to be used as the source for publication.  I will upload that to the ticket as well"
+10,11:17:10-05:00,wcampbel,comment,15,"1. PDF updates -ETA today/tomorrow morning.
+2. Jay to add the pathology observables to the tech preview loinc map.  ETA - tomorrow.
+3. Release notes are good to go.
+4. Plan on notification of NLM/RII Wednesday
+5. Wednesday, we test the download.
+6. Target NLM List Serve notification for Monday?"
+9,11:21:19-05:00,wcampbel,comment,10,"Yesh to take some of JGP's python code to extract observables from SNOMED CT.  Retain ontology for tech preview for i2b2 representation.  ~2000 LOINC codes.
+
+Complete as time available - 2 weeks?
+
+Common panel codes to be added in  later, but this will serve as SCILHS metadata and potential for RII release"
+24,11:24:33-05:00,wcampbel,comment,1,Phil to create a rule to email us of a message error.  Message to be stored/saved in Mirth for reprocess after correction of DB's.  
+12,11:25:59-05:00,wcampbel,comment,4,WSC to review with Griener on Thursday/Friday
+14,11:26:52-05:00,wcampbel,comment,3,WSC discussed with Brian Lancaster.  Brian to issue approval to take a copy of RPS feed for this purpose.
+16,11:28:08-05:00,wcampbel,status,assigned,closed
+16,11:28:08-05:00,wcampbel,resolution,,duplicate
+16,11:28:08-05:00,wcampbel,comment,3,See ticket #9
+20,11:30:09-05:00,wcampbel,comment,4,"LDAP developed by RITO (being confirmed and validated by Phil).  RITO now done with this effort.  All other work done by our team.
+
+Current meteor with react deployed on test box (10.8.22.94:8082)  Phil to present later today."
+22,11:30:45-05:00,wcampbel,comment,1,"Jay developed work plan, and will attempt to implement on test later this week."
+11,11:32:53-05:00,wcampbel,status,new,closed
+11,11:32:53-05:00,wcampbel,resolution,,wontfix
+11,11:32:53-05:00,wcampbel,comment,4,"No longer a ""formal"" requirement.  May be needed for single entities, but only if requested"
+17,11:39:34-05:00,wcampbel,comment,6,"JRC started slides.  Tickets updated.
+
+WSC to complete XGM registration."
+15,11:19:24-05:00,wcampbel,comment,2,Lancaster/Weis approved redirect of 2.3.1 encoded lab results for RPS to be redirected with new feed to BD2k landing zone.  SC and PC to discuss info model for results.
+3,11:21:02-05:00,wcampbel,comment,4,No updates
+22,11:32:47-05:00,wcampbel,comment,2,"Will discuss with PC, JGP and SC tomorrow (4/11/17)"
+6,11:44:58-05:00,wcampbel,comment,5,"WSC to validate .zip file download.
+
+Inlcude release notes for reading.  SITE SUCKS PER JRC.  DON'T PUNISH THE CUSTOMER...MAKE A NEW GLORIOUS LANDING PAGE."
+10,11:50:50-05:00,wcampbel,comment,16,"All commentators silent, but JRC to shake the tree.  If no response by Wednesday, then we publish.
+
+Evaluation form - discuss with observables.
+
+JRC - shake the trees
+JRC - Draft survey
+WSC - solicit observables input
+WSC - fix the mischugana website."
+17,11:52:41-05:00,wcampbel,comment,7,JRC - to get slides sets circulated and submitted by end of week.
+9,12:14:51-05:00,wcampbel,comment,11,"RxNorm - two hierarchies (VA drug classes and ingredients)  Added indication that when differing counts that the VA version is specific to the VA subset.  Upload to BABEL this week.
+
+Documentation needs to be put together this week.
+
+
+Lab Loinc/Path - Yesh to create statistical list of inferred paths from LOINC leaf nodes to root.  Then we vet the list for non-parsimonious groupers."
+9,09:28:35-05:00,campbell,comment,12,"Reviewed LOINC ontology build on Friday on i2b2 - good start but AP and MP observables from CAP cancer observables build not included
+Supertype assignments reviewed and edited Saturday to properly classify several lab tests and AP/MP results.
+New snapshot to be developed Monday from SNOWOWL with my edited changes and Yesh to create new LOINC i2b2 pathway build to include all Nebraska terminology build
+Load revisions in i2b2 for review and discussion of lab ontology"
+9,12:33:19-05:00,wcampbel,comment,13,Rerun RF2 from SNOWOWL and reinstall into i2b2.  Needs to include pathology data.  Yesh to do today
+17,12:42:29-05:00,wcampbel,comment,8,"JRC, JGP, WSC - need brief bio (3 sentences-ish) by end of week to session chair."
+9,07:20:16-05:00,campbell,comment,14,"In response to Jay's question, I attach a frequency analysis of lab orders in One Chart and highlight in green 6 panel codes we want to add to our metadata"
+10,11:11:06-05:00,campbell,status,new,assigned
+10,11:11:06-05:00,campbell,owner,wcampbel,jay.pedersen@unmc.edu
+10,11:11:06-05:00,campbell,comment,17,"Error noted in JRC mapping files with replacement of 85298-X by 85303-X and incorrect definition in LOINC definition.   
+Remediation:
+1) RI contacted and agreed to change in definition and long name of 85298-X
+2) WSC to revise colorectal annotated checksheet and insert revised long name for LOINC term
+3) JP to revise mapping file with SNCT-LOINC codes, delete incorrect assertions in RF2 and replace 85303-X with 85298-X
+4) JP toassure that all release copies in BOX are correct and remove or edit old datasets"
+10,21:14:29-05:00,jpedersen,comment,18,"JGP -- generated new LOINC-ified RF2 using updated mapping from JRC (85298-X by 85303-X), using the March 31, 2017 RF2 extracted from SNOWOWL as input.
+
+The updated RF2 terminology files and map file were updated in BOX.
+
+This included the following 5 files:
+
+  der2_sRefset_LOINCMapSnapshot_INT_20170331.txt
+  sct2_Concept_Snapshot_INT_20170331.txt
+  sct2_Description_Snapshot-en-us_INT_20170331.txt
+  sct2_Relationship_Snapshot_INT_20170331.txt
+  sct2_StatedRelationship_Snapshot_INT_20170331.txt
+ 
+They were uploaded to the following BOX locations:
+
+  Cancer Synoptic Coding\6) Publication artifacts: COPATH and annotated checksheets\Publication_Files_20170331\Terminology and Refset\Map.
+
+Compared the ""before"" and ""after"" files and the only differences appeared to relate directly to the mapping change, as expected.
+"
+10,11:23:07-05:00,wcampbel,comment,19,"Rerun NE Lexicon snapshot today.  Jay to LOINC-ify and SC to publish tomorrow am.
+
+WSC and JRC to discuss and draft letter to SNOMED International about publication of terms."
+25,11:24:52-05:00,wcampbel,comment,1,Jay to teach Yeshwanth on this process.  Yesh to develop.  Include test machine
+17,11:27:07-05:00,campbell,status,assigned,closed
+17,11:27:07-05:00,campbell,resolution,,fixed
+17,11:27:07-05:00,campbell,comment,9,
+24,11:27:45-05:00,wcampbel,comment,2,"Scott, Phil and Jay to discuss later today on specifics."
+4,11:32:17-05:00,campbell,comment,6,April 2017 Agreed with ICCR lung cancer would be demo project for publication and harmonization process
+15,11:39:46-05:00,wcampbel,comment,3,"RPS data forwarded to TEST.  DB design needed for micro results.
+
+Scott and Phil to discuss ER model this week."
+14,11:40:30-05:00,wcampbel,comment,4,Complete.  To test box. 10.8.22.94
+14,11:40:49-05:00,wcampbel,status,new,closed
+14,11:40:49-05:00,wcampbel,resolution,,fixed
+14,11:40:49-05:00,wcampbel,comment,5,
+23,11:41:20-05:00,wcampbel,status,new,closed
+23,11:41:20-05:00,wcampbel,resolution,,fixed
+23,11:41:20-05:00,wcampbel,comment,1,Complete
+9,11:43:44-05:00,wcampbel,owner,jay.pederen@unmc.edu,jay.pedersen@unmc.edu
+9,11:43:44-05:00,wcampbel,comment,15,Add load procedure for technology preview (beta tech preview).  Jayto work with JRC.
+15,11:45:16-05:00,wcampbel,status,new,closed
+15,11:45:16-05:00,wcampbel,resolution,,fixed
+15,11:45:16-05:00,wcampbel,comment,4,
+13,11:46:05-05:00,wcampbel,comment,2,Scott and Phil to discuss initial ER diagram.  Review with JRC.
+20,11:56:49-05:00,wcampbel,comment,5,"Phil, Jay and Scott to discuss building observable ontology derived queries.  Review with JRC.  Prototype and show to select users for feedback."
+22,11:58:07-05:00,wcampbel,comment,3,"WSC to run NE Lexicon (only) snapshot for Jay to LOINC-ify.
+
+WSC to run FULL version for load into graphDB.  Jay to load into new graph on test."
+22,12:04:11-05:00,wcampbel,comment,4,"Also, need to add LOINC id's as LOINCID to all nodes where there is equivalence.  Use our LOINC map"
+3,12:09:52-05:00,wcampbel,comment,5,Hold until Lung complete
+3,12:11:02-05:00,wcampbel,comment,6,Review content and revise concepts as necessary per Observables input.
+5,12:13:48-05:00,wcampbel,summary,Load Gene Ontology into Neo4j,Load Gene Ontology into Protege
+5,12:13:48-05:00,wcampbel,comment,4,Move to protege vs. Neo4j for this work.  JRC has loaded into Protege
+19,12:15:28-05:00,wcampbel,comment,3,"1)  MP paper ongoing.  Revisions to authors by end of week.
+
+2)  WSC to prep Path Info Summit slides (AP and MP)
+
+"
+4,17:55:20-05:00,wcampbel,comment,7,Updated content in Box (folder 4) for JRC's review.  UNMC_Copath tab contains the up to date Copath representation and pathologist review.
+22,18:00:54-05:00,wcampbel,cc,campbell@unmc.edu,"campbell@unmc.edu, phil.colbert@unmc.edu, jay.pedersen@unmc.edu"
+22,18:00:54-05:00,wcampbel,comment,5,"Step wise plan:
+Jay will create a new graph database with the current SNOMED CT codes and relationships.  (Deleted codes will not be present in his source files).
+
+Assuming that we have all HL7 synoptic report messages stored in Mirth, we will be able to repopulate the new graphDB via reprocessing the messages.  (Can Philconfirm that we have all the HL7 messages stored back to the first one?  I think we had Milissa retransmit when you started working on this grant.)
+
+We will need to have Phil write a message transform script that will transform the HL7 messages to replace SNOMED CT codes no longer present with their replaced codes.  The list is small (<100 codes)
+
+Once the transform script is validated, we can reprocess the stored hl7 messages and import into the graphDB using the transform and rest API.
+
+We can leave the transform process in place for current Copath messages, too.  This will allow us some flexibility in Copath coding change timing.  Once the Copath coding (SNOMED CT) changes are moved to production Copath, the transform process will no longer be needed and can be removed.  However, it will not hurt to have it in place.
+
+We will then extract paraffin specimen data elements from the current graphDB and import into the new graphDB.  These items are not affected by any changes in the SNOMED CT numbering."
+9,11:13:11-05:00,wcampbel,comment,16,No progress on RF2 beta tech preview due to graphDB updates. To be completed this week.
+9,11:14:13-05:00,wcampbel,comment,17,RXNorm metadata uploaded for Jeff Klann review
+24,11:17:13-05:00,wcampbel,comment,3,On hold until graph updated and use case vetted.
+25,11:19:24-05:00,wcampbel,comment,2,Yesh to complete
+12,11:19:58-05:00,wcampbel,comment,5,FSN work to resume.
+13,11:25:15-05:00,wcampbel,comment,3,"Agreed that tables by segment are sufficient.  Views are acceptable, but need to be vetted by Jim for his use cases before an implementation.
+
+SC and PC to discussed Tuesday"
+20,11:31:05-05:00,wcampbel,status,new,assigned
+20,11:31:05-05:00,wcampbel,owner,wcampbel,rachael.neff@unmc.edu
+20,11:31:05-05:00,wcampbel,comment,6,RN now to work on user specifications and integration with DB to drive queries and other functions from NE CARES.
+22,11:31:50-05:00,wcampbel,comment,6,"Complete, but reconciling synoptic report data.  Anticipate complete resolution by end of day."
+5,11:33:26-05:00,campbell,owner,jay.pedersen,campbell
+5,11:33:26-05:00,campbell,comment,5,
+6,11:34:34-05:00,wcampbel,comment,6,JRC/J McClay and WSC to discuss formal informatics landing page/area for this work.
+10,11:37:42-05:00,wcampbel,comment,20,WSC to notify NLM today and provide URL.
+25,11:52:59-05:00,jpedersen,comment,3,"My analysis of what needs to happen:
+
+#1. TRAC backup
+
+For our TRAC instances, which exist on NECARES DEV, we need to backup the folder structure:
+
+    /sno/trac
+
+I suggest we create a backup folder to store this:
+
+  /sno/backup
+
+We would create a cron job, to run at 2:05 am (or some such), which performs this backup.
+
+I have existing bash and python scripts which can be modified to make this work.
+I will work with Yesh on that so that he understands how those scripts work.
+
+#2. GITLAB backup
+
+Here is some information on performing a backup of the GITLAB repositories.
+
+https://docs.gitlab.com/ce/raketasks/backup_restore.html#create-a-backup-of-the-gitlab-system
+
+Backing up and restoring GitLab - GitLab Documentation
+docs.gitlab.com
+GitLab Community Edition; Rake tasks; Backing up and restoring GitLab; Backing up and restoring GitLab. Backup. Backup timestamp; Creating a backup of the GitLab system
+
+#3. Copying the backup to RITO with DoBackup
+
+We need to use the DoBackup software provided by RITO,
+and we need to work with Mike Gleason or Mike Zietz
+to make sure RITO is ready for us to send them backups
+from NECARES DEV."
+26,14:53:33-05:00,campbell,comment,1,"All LOINC maps from SNOWOWL created by Jay at the time of tech preview import have been extracted to file LOINC_tech_preview
+Jim"
+9,09:56:44-05:00,campbell,comment,18,Med admin ETL load and QA revealed ~175 NDC codes not in SCILHS
+24,09:57:48-05:00,campbell,milestone,,NE CARES/Biobank Interactions
+24,09:57:48-05:00,campbell,comment,4,
+25,09:58:19-05:00,campbell,milestone,,NE CARES/Biobank Interactions
+25,09:58:19-05:00,campbell,comment,4,
+12,09:58:45-05:00,campbell,milestone,,Terminology Development
+12,09:58:45-05:00,campbell,comment,6,
+26,09:59:29-05:00,campbell,milestone,,Terminology Development
+26,09:59:29-05:00,campbell,comment,2,
+27,09:59:58-05:00,campbell,milestone,,NE CARES/Biobank Interactions
+27,09:59:58-05:00,campbell,comment,1,
+24,11:27:12-05:00,campbell,comment,5,JRC to post examples of metadataxml from Oracle to ticket for exemplar
+22,11:34:07-05:00,campbell,status,assigned,closed
+22,11:34:07-05:00,campbell,resolution,,fixed
+22,11:34:07-05:00,campbell,comment,7,
+27,11:38:46-05:00,campbell,priority,minor,critical
+27,11:38:46-05:00,campbell,comment,2,Scott to vaerify with Ashok and prioritize work plan for move to HTTPS
+10,12:00:24-05:00,campbell,priority,major,minor
+10,12:00:24-05:00,campbell,comment,21,Next publication 6 months
+20,13:00:09-05:00,campbell,comment,7,"Discussed query constraints for user interface to be built employing i2b2 metadataxml which we are also constructing for our data warehouse organized by observable code.  Example below illustrative of xml for selection of 'state' code in i2b2
+
+
+<?xml version=""1.0""?>
+<ValueMetadata>
+<Version>3.02</Version>
+<CreationDateTime>11/04/2014 11:02:00</CreationDateTime>
+<TestID>LOINC:46499-0</TestID>
+<TestName>State</TestName>
+<DataType>Enum</DataType>
+<Flagstouse></Flagstouse>
+<Oktousevalues>N</Oktousevalues>
+<EnumValues>
+<Val description=""Aguascalientes"">AG</Val>
+<Val description=""Alabama"">AL</Val>
+<Val description=""Alaska"">AK</Val>
+<Val description=""Alberta"">AB</Val>
+<Val description=""American Samoa, South Pacific"">AS</Val>
+<Val description=""Arizona"">AZ</Val>
+<Val description=""Arkansas"">AR</Val>
+<Val description=""Armed Forces Americas"">AA</Val>
+<Val description=""Armed Forces Europe"">AE</Val>
+<Val description=""Armed Forces Pacific"">AP</Val>
+<Val description=""Baja California Sur"">BS</Val>
+<Val description=""Baja California"">BJ</Val>
+<Val description=""British Columbia"">BC</Val>
+<Val description=""California"">CA</Val>
+<Val description=""Campeche"">CP</Val>
+<Val description=""Chiapas"">CH</Val>
+<Val description=""Chihuahua"">CI</Val>
+<Val description=""Coahuila"">CU</Val>
+<Val description=""Colima"">CL</Val>
+<Val description=""Colorado"">CO</Val>
+<Val description=""Connecticut"">CT</Val>
+<Val description=""Delaware"">DE</Val>
+<Val description=""District of Columbia"">DC</Val>
+<Val description=""Distrito Federal"">DF</Val>
+<Val description=""Durango"">DG</Val>
+<Val description=""Federated States of Micronesia"">FM</Val>
+<Val description=""Florida"">FL</Val>
+<Val description=""Georgia"">GA</Val>
+<Val description=""Guam"">GU</Val>
+<Val description=""Guanajuato"">GJ</Val>
+<Val description=""Guerrero"">GR</Val>
+....
+</EnumValues>
+<UnitValues>
+</UnitValues>
+</ValueMetadata>"
+20,13:02:17-05:00,campbell,comment,8,"If we proceed with this design, should discuss where we would maintain metadataxml reference table for access by software developers on both platforms."
+9,11:20:46-05:00,wcampbel,comment,19,"Yesh loading LOINC ontology/metadata.  Finish by today.
+
+Jay loading SNOMED CT diagnoses in SCILHS metadata model.  4 - 6 hours work left.
+
+JRC to ping Jeff Klann for follow up.  Add total parenteral nutrition (IV feeding) as an ingredient."
+27,11:25:09-05:00,wcampbel,comment,3,Scott to check if username/password execution is encrypted behind the firewall.
+13,11:28:56-05:00,wcampbel,comment,4,JRC started draft protocol.  WSC to get ABx logic rules and post.
+24,11:31:50-05:00,wcampbel,comment,6,JGP has audit algorithm to monitor.
+24,11:33:50-05:00,wcampbel,comment,7,Follow up meeting on Wednesday to discuss this issue and other graphDB issues.
+25,11:34:55-05:00,wcampbel,comment,5,Yesh to get this addressed this week.
+3,11:36:10-05:00,wcampbel,comment,7,RII to have codes to us next week for review.
+3,11:37:28-05:00,wcampbel,comment,8,WSC to get ICCR template and upload
+26,11:40:20-05:00,wcampbel,comment,3,See LOINC metadata build comments.  Review of ontology organization will be done via i2b2.  Yesh to have loaded for Observables call on 6/13
+25,10:17:05-05:00,yeshwanth.narayana,comment,6,"Currently TRAC is being backed-up every morning at 2:10am. We need configuration parameters for DoBackup.cfg.
+
+Will add steps to backup GITLAB."
+24,10:58:41-05:00,jpedersen,comment,8,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+NOTE: the ""with"" clause after the OPTIONAL MATCH in the following CYPHER queries is crucial to correct operation.  Attemping to use ""where r is null"" in the OPTIONAL MATCH will yield an incorrect (too large) result. See: https://dzone.com/articles/new-neo4j-optional
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f where r is null
+return e
+}}}
+
+To determine the distinct set of questionId values associated with these unlinked questionId nodes:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f where r is null
+return distinct e.questionId
+}}}
+
+To look for unlinked answerId values in SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f where r is null
+return e
+}}}
+
+To look for the answerId values associated with these SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f where r is null
+return distinct e.answerId
+}}}
+
+"
+9,11:10:51-05:00,wcampbel,comment,20,"Rx done
+Dx for SCILHS almost complete
+Yesh working on panels
+
+6 month refresh cycle for metadata distribution, deploy from our servers
+
+Set up conference call with Shawn Murphy and Jeff Klan to discuss metadata acceptability for SCILHS use.
+
+new ticket for load scripts development."
+27,11:13:26-05:00,wcampbel,comment,4,Scott waiting response from Lisa Bazis
+19,11:14:46-05:00,campbell,comment,4,JP and JRC plan to expand the paper submitted to AMIA and publish 
+13,11:24:41-05:00,wcampbel,comment,5,Scott to share Labpoint work on ELIRT 3.0 and use as template for ongoing micro modelling development/implementation
+3,11:27:47-05:00,wcampbel,comment,9,"Awaiting on Melanoma responses from RII within next two weeks.
+
+WSC to get Survey Monkey out to ICCR for processing"
+20,11:45:57-05:00,wcampbel,comment,9,"Rachael ready for Wednesday meeting.
+
+Jay to coordinate with JRC and Yesh to load into staging table and into DEID.  Include biospecimen data
+
+"
+25,11:53:02-05:00,wcampbel,comment,7, How to put onto box (no sync)
+26,11:55:11-05:00,wcampbel,comment,4,"Yesh to add panel codes.
+
+Daniel Karlsson to get additional 350 codes defined as used by UNMC."
+24,10:58:41-05:00,jpedersen,_comment0,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+These codes will generally be Nebraska Lexicon codes related to CAP Synoptic Worksheets which have been encoded into SNOMED CT (via NE Lexicon codes)
+
+To look for these cases, the following CYPHER can be used, first draft:
+{{{
+match (a:SynopticObservation)--(b) where NOT (a)-[:HAS_QUESTION]->(b) return a
+}}}
+
+Attempt at optimized query, in -progress:
+{{{
+match (a:SynopticObservation)
+optional match (b:ObjectConcept {sctid: a.questionId})
+<return-statement-where-b-is-null-TBD>
+}}}
+",1497894068685260
+24,10:58:41-05:00,jpedersen,_comment1,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (a:SynopticObservation) where length(a.questionId) > 0
+with collect(distinct a.questionId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.questionId in c3
+return 'There are '+length(c3)+' distinct unlinked questionId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue.
+
+Look for SynopticObservation with a missing answerId:
+{{{
+match (a:SynopticObservation) where length(a.answerId) > 0
+with collect(distinct a.answerId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.answerId in c3
+return 'There are '+length(c3)+' distinct unlinked answerId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue.",1497896615148471
+24,10:58:41-05:00,jpedersen,_comment2,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To determine the distinct set of questionId values associated with these unlinked questionId nodes:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return distinct e.questionId
+}}}
+
+To look for unlinked answerId values in SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To look for the answerId values associated with these SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return distinct e.answerId
+}}}
+
+------------------------- Alternate method, using COLLECT ----------------------------
+
+{{{
+match (a:SynopticObservation) where length(a.questionId) > 0
+with collect(distinct a.questionId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.questionId in c3
+return 'There are '+length(c3)+' distinct unlinked questionId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue.
+
+Look for SynopticObservation with a missing answerId:
+{{{
+match (a:SynopticObservation) where length(a.answerId) > 0
+with collect(distinct a.answerId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.answerId in c3
+return 'There are '+length(c3)+' distinct unlinked answerId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue.",1497896664679218
+24,13:27:12-05:00,jpedersen,comment,9,"(NOTE: JUST FOR INFORMATION, THE SUGGESTION IS TO USE THE CYPHER FROM THE PREVIOUS COMMENT)
+
+I believe the previous comment provides the easiest-to-understand method of determining unlinked questions and answers.  This comment provides an alternative method using the COLLECT clause -- just for information.
+
+Determine SynopticObservation nodes with unlinked questionId values:
+
+{{{
+match (a:SynopticObservation) where length(a.questionId) > 0
+with collect(distinct a.questionId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.questionId in c3
+return 'There are '+length(c3)+' distinct unlinked questionId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue.
+
+Look for SynopticObservation with a missing answerId:
+{{{
+match (a:SynopticObservation) where length(a.answerId) > 0
+with collect(distinct a.answerId) as c1
+match (b:ObjectConcept) where b.sctid in c1
+with c1,collect(distinct b.sctid) as c2
+with c1,c2,filter(id in c1 where not id in c2 and length(id)>0) as c3
+with c3
+match (a:SynopticObservation) where a.answerId in c3
+return 'There are '+length(c3)+' distinct unlinked answerId values, contained in '+count(a)+' SynopticObservation nodes.'
+}}}
+
+NOTE: {{{return c3}}} to obtain the exact codes and {{{return a}}} to return the exact SynopticObservation nodes with this issue."
+24,10:58:41-05:00,jpedersen,_comment3,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To determine the distinct set of questionId values associated with these unlinked questionId nodes:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return distinct e.questionId
+}}}
+
+To look for unlinked answerId values in SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To look for the answerId values associated with these SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return distinct e.answerId
+}}}
+
+",1497896943259881
+24,10:58:41-05:00,jpedersen,_comment4,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+NOTE: the ""with"" clause after the OPTIONAL MATCH is crucial to this operation.  Attemping to use ""where r is null"" in the OPTIONAL MATCH will yield an incorrect (too large) result. See:
+https://dzone.com/articles/new-neo4j-optional
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To determine the distinct set of questionId values associated with these unlinked questionId nodes:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return distinct e.questionId
+}}}
+
+To look for unlinked answerId values in SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To look for the answerId values associated with these SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return distinct e.answerId
+}}}
+
+",1497896988404108
+24,10:58:41-05:00,jpedersen,_comment5,"Specifically, this issue relates to SynopticObservation nodes, which have either a questionId or answerId which do not link to SNOMED CT codes in the database.
+
+NOTE: the ""with"" clause after the OPTIONAL MATCH in the following CYPHER queries is crucial to correct operation.  Attemping to use ""where r is null"" in the OPTIONAL MATCH will yield an incorrect (too large) result. See: https://dzone.com/articles/new-neo4j-optional
+
+To look for SynopticObservation nodes with unlinked questionId:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To determine the distinct set of questionId values associated with these unlinked questionId nodes:
+{{{
+match (e:SynopticObservation) where length(e.questionId) > 0
+optional match (e)-[r:HAS_QUESTION]-(f:ObjectConcept {sctid: e.questionId})
+with e, r, f
+where r is null
+return distinct e.questionId
+}}}
+
+To look for unlinked answerId values in SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return e
+}}}
+
+To look for the answerId values associated with these SynopticObservation nodes:
+{{{
+match (e:SynopticObservation) where length(e.answerId) > 0
+optional match (e)-[r:HAS_ANSWER]-(f:ObjectConcept {sctid: e.answerId})
+with e, r, f
+where r is null
+return distinct e.answerId
+}}}
+
+",1497897061274150
+29,05:35:15-05:00,campbell,comment,1,"Note that our AP/MP Observables coding project is structuring and coding the synoptic report findings.  We will be storing the Observation_facts with 
+CONCEPT_CD = LOINC with map to our extension codes
+TVAL_CHAR or NVAL_NUM will store result depending on datatype and valueset
+UNITS is defined by Observable
+INSTANCE_NUM will be rendition of synoptic case identifier"
+26,10:33:13-05:00,campbell,comment,5,"Must Load LOINC 2.61 into Epic; coordinate with Jane Carrothers.
+Update ontology build to include 2.61 additions."
+9,11:10:47-05:00,wcampbel,comment,21,"Yesh completed panel code load.  JRC and Yesh to review and load Loinc 2.61
+
+WSC to nag Klan and Murphy for a call.  Possibly with NCBO/Musen"
+27,11:11:37-05:00,wcampbel,status,new,closed
+27,11:11:37-05:00,wcampbel,resolution,,wontfix
+27,11:11:37-05:00,wcampbel,comment,5,Not pursing anymore
+3,11:12:31-05:00,wcampbel,comment,10,We will reconcile UNMC with ICCR input before implementing.
+13,11:33:37-05:00,wcampbel,comment,6,"Meet with Linsey today at 12 re: her involvement.
+
+JRC to continue to develop model for graph and i2b2"
+20,11:35:52-05:00,wcampbel,comment,10,"JGP developed info model for NE CARES and SNOMED CT semantic core
+
+RN ongoing dev for modeling
+
+Working on melding info model with metadata model for query generation."
+25,11:36:32-05:00,wcampbel,comment,8,Yesh to work on box storage
+26,11:37:27-05:00,wcampbel,comment,6,Yesh to load LOINC 2.61
+29,11:41:32-05:00,wcampbel,comment,2,JRC and JGP to flesh out one example of synoptic report in graph to i2b2.
+29,06:27:09-05:00,campbell,comment,3,"Jay
+Can you please grab a synoptic report that has been issued and filed in NECARES?  If in HL7 format, perhaps you can save it to the MySQL that Phil created?
+Jim"
+29,17:11:01-05:00,campbell,comment,4,"SYNOPTIC DATA PROCESSING FROM HL7 MESSAGES (discussion JGP and JRC)
+
+1)	Compute PATIENT_NUM from PID segment
+2)	Hash and prepare INSTANCE_NUM from OBR segment
+3)	Extract relevant ENCOUNTER_NUM and LOCATIO_CD from PV1 data?
+4)	Process individual OBX segments as individual OBSERVATION_FACTS with identifiers from steps 1-3
+5)	OBX segments wirh CWE datatype and ONLY coded element in field 5: Fld_3 goes to CONCEPT_CD, Fld 5 goes to TVAL_CHAR; construct METADATAXML for the observable to be enumerated list with valueset reported
+6)	OBX segments with CWE datatype and 7964007|OTHER| in Fld 5: Fld_3 goes to CONCEPT_CD, comment field goes to CLOB, METADATAXML is constructed as STRING data type for now
+7)	OBX segments with TX datatype: Fld_3 goes to CONCEPT_CD, comment field goes to CLOB, METADATAXML is constructed as STRING data type 
+8)	OBX segment with NM datatype: Fld_3 goes to CONCEPT_CD, Fld 5 numeric segment to NVAL_NUM, Fld 6 to UNITS_CD; METADATAXML prepared for INTEGER or FLOAT datatype and normal ranges are added if possible.
+"
+29,17:13:21-05:00,campbell,comment,5,JGP will inventory unique text strings reported as OTHER by pathologists indexed by Observables code in order to support WSC and JRC review with the clinical pathologists
+29,07:21:15-05:00,campbell,comment,6,"Updated 6/29/17
+
+SYNOPTIC DATA PROCESSING
+1)	Compute PATIENT_NUM from PID segment
+2)	Hash and prepare INSTANCE_NUM from OBR segment
+3)	Extract relevant ENCOUNTER_NUM, PROVIDER_ID, START_DATE and LOCATION_CD from PV1 data?
+4)	Process individual OBX segments as individual OBSERVATION_FACTS with identifiers from steps 1-3
+5)	OBX segments with CWE datatype and ONLY coded element in field 5: Fld_3 converted to LOINC code goes to CONCEPT_CD, Fld 5 goes to TVAL_CHAR; construct METADATAXML for the observable to be enumerated list with valueset reported
+6)	OBX segments with CWE datatype and 7964007|OTHER| in Fld 5: Fld_3 converted to LOINC code goes to CONCEPT_CD, comment field goes to CLOB, METADATAXML is constructed as STRING data type for now
+7)	OBX segments with TX datatype: Fld_3 converted to LOINC code goes to CONCEPT_CD, comment field goes to CLOB, METADATAXML is constructed as STRING data type 
+8)	OBX segment with NM datatype: Fld_3 converted to LOINC code goes to CONCEPT_CD, Fld 5 numeric segment to NVAL_NUM, Fld 6 to UNITS_CD; METADATAXML prepared for INTEGER or FLOAT datatype and normal ranges are added if possible.
+"
+26,06:51:52-05:00,campbell,comment,7,All but one LOINC code for anatomic and molecular pathology released within LOINC v2.61.  SNOMED CT - LOINC concept map in SNOWOWL needs to be supplemented with these new maps to serve the LOINC ontology build V1.
+30,07:10:33-05:00,campbell,comment,1,Messaging from COPATH needs to support LOINC codes (as well as SNOMED CT?) in all pathology observations reported.
+25,15:27:43-05:00,yeshwanth.narayana,comment,9,"Modified the python program to backup gitlab.
+Every day at 2:10am GITLAB gets backedup along with TRAC.
+We need to decide where to save these backup files."
+25,15:30:51-05:00,wcampbel,comment,10,"Yesh, please have these files  saved along with all other NE CARES files within the RITO backup environment"
+31,11:49:10-05:00,jpedersen,status,assigned,closed
+31,11:49:10-05:00,jpedersen,resolution,,fixed
+31,11:49:10-05:00,jpedersen,comment,1,"Report created and sent to Jim Campbell and Scott Campbell on July 6, 2017.
+
+The report indicates the caseId involved in all of these cases.
+
+{{{
+Now there is one row for each and every 'Other' response.
+
+Statistics:
+
+  576 HL7 messages examined
+  917 times that 'other' was entered in those HL7 messages (many opportunities in each HL7 message)
+  197 cases (distinct caseId values), where 'other' entered
+  64 distinct questions where 'other' was entered
+
+Oracle: CAMPBELL.BD2K_OTHER_RESPONSES on IDWK
+
+CSV and spreadsheet -- attached
+}}}
+
+A GITLAB project contains the source code and results.
+
+http://10.8.22.222:8090/BD2K_PROJECTS/SYNRPT_OTHER_RESPONSES_20170706"
+9,11:09:11-05:00,wcampbel,comment,22," Yesh is working on observable metadata for JRC to present on GPC call tomorrow, 7/11.
+
+No responses form Klann and Murphy...Hmmm.
+
+Shrine spoke items pending Ashok's SLA and pricing to WSC.  (It is on Mike Zietz's work list, but no more data that we know of.)"
+9,11:09:28-05:00,wcampbel,comment,23," Yesh is working on observable metadata for JRC to present on GPC call tomorrow, 7/11.
+
+No responses form Klann and Murphy...Hmmm.
+
+Shrine spoke items pending Ashok's SLA and pricing to WSC.  (It is on Mike Zietz's work list, but no more data that we know of.)"
+26,11:10:24-05:00,wcampbel,comment,8,See ticket #9
+20,11:13:28-05:00,wcampbel,comment,11,JGP has developed schematic for two options.  Rachael working on one set of path options.  Meeting on Wednesday to discuss.
+25,11:14:36-05:00,wcampbel,comment,11,Trac is being backed up.  Gitlab now backing up.  Yesh still needs config details from RITO.
+29,11:19:24-05:00,wcampbel,comment,7,"JGP working to resolve ""other"" items.
+
+Also, how best to import into i2b2.  JGP and JRC."
+24,11:20:11-05:00,wcampbel,status,assigned,closed
+24,11:20:11-05:00,wcampbel,resolution,,invalid
+24,11:20:11-05:00,wcampbel,comment,10,
+32,12:50:56-05:00,campbell,comment,1,"Phone participants:
+•	megan@mraia.org - organizer
+•	kdoshi@cookcountyhhs.org
+•	jasmin@mraia.org
+•	wtrick@cookcountyhhs.org
+•	apatino@cookcountyhhs.org
+•	craig@mraia.org
+•	hzhang@cookcountyhhs.org
+
+
+"
+20,11:21:47-05:00,jpedersen,comment,12,"JGP designing schema changes, to the point where agreement has been reached.  WHich is ... that domain-specific edges will be used to drive the visualization.  Different edge types for Colon Cancer Synoptic Reports versus Breast Cancer Synoptic Reports, for example.
+
+Additionaly, prototype schema changes are being designed -- which have not yet been agreed to, but which will be discussed at the next GUI meeting ... to be held this Wednesday (July 19, 2017).  The current idea is to be able to find the associated patient set for each piece of information being queried."
+29,12:50:39-05:00,campbell,comment,8,Nucleotide sequence data pertinent to cancer synoptics: 50 gene panel loaded into SNOMED CT for MP development
+32,08:30:27-05:00,jpedersen,comment,2,"Work in progress.  Using code used to create SCILHS MEDICATIONS to create these tables with the same core information.  30% done, expect to complete within the next two weeks."
+32,08:30:27-05:00,jpedersen,_comment0,"Work in progress.  Using core code used to create SCILHS MEDICATIONS to create these tables with the same core information.  30% done, expect to complete within the next two weeks.",1500643858672061
+9,11:10:31-05:00,wcampbel,comment,24,Meeting set for 8/2/2017 with Jeff Klann and Sean Murphy to discuss.  Their initial response to concept model is up for discussion.
+29,11:14:49-05:00,wcampbel,comment,9,"WSC needs to fix some of the value sets (""other""; reuse of SNOMED CT concepts in same value set).
+
+JGP full extract and reconcile plan.  Incremental not currently plausible until overall i2b2 incremental update plan."
+13,11:18:11-05:00,wcampbel,comment,7,Staff position for this role now approved.  To be posted within one week.
+25,11:25:30-05:00,wcampbel,comment,12,Plan is to replicate the production process for Dev per RITO.  Yesh to complete today
+25,09:26:49-05:00,yeshwanth.narayana,comment,13,The backup is now being stored on RITO machine.
+25,09:27:10-05:00,yeshwanth.narayana,status,assigned,closed
+25,09:27:10-05:00,yeshwanth.narayana,resolution,,fixed
+25,09:27:10-05:00,yeshwanth.narayana,comment,14,
+29,11:13:16-05:00,wcampbel,comment,10,"Scott to review ""other"" items and determine codification. Scott/Jay to write/store and run an ""other"" in NE CARES (Canned report with Phil)
+
+Current plan to move data to i2b2 is via ETL from Graph"
+13,11:15:09-05:00,wcampbel,comment,8,"JRC completing algorithm for review by JGP, PC and LD (Linsey Donner)
+
+Staff position posted for NU applicants first"
+20,11:24:51-05:00,wcampbel,comment,13,"WSC to discuss with Geoff use of observable and histology type in lieu of ""disorder"" concepts for non-synoptically reported tissue"
+9,11:32:39-05:00,wcampbel,comment,25,"Wednesday call with Jeff Klann/Shawn Murphy.
+
+
+RxNorm work to do (new content)
+
+SNOMED CT - still need their comments
+
+LOINC - Lab observables by this week (JRC); published before JRC's holiday (8/12 - 9/12)"
+32,11:35:01-05:00,wcampbel,comment,3,JGP to move to Yesh.  Yesh follow up with Jay today regarding method/requirements.  
+30,11:35:51-05:00,wcampbel,comment,2,"WSC to correct ambiguous codes and ""others"""
+3,11:39:15-05:00,wcampbel,comment,11,"WSC/JGP to review and come up with final FSN via ICCR input.
+
+WSC to schedule sharing time with ICCR folks."
+3,11:40:02-05:00,wcampbel,comment,12,WSC to review value sets for CAP sheets
+4,11:40:52-05:00,wcampbel,comment,8,JRC/WSC to discuss workplan with Jim visit the large turtles
+10,11:41:40-05:00,wcampbel,status,assigned,closed
+10,11:41:40-05:00,wcampbel,resolution,,fixed
+10,11:41:40-05:00,wcampbel,comment,22,
+34,13:00:40-05:00,jpedersen,description,"The code that creates the SNOMED CT core can be improved by the following
+
+#1. Validate that the interface to NEO4J is working,
+    and specifically that LOAD CSV commands will work.
+
+Currently, if there is a NEO4J issue ... it is not determined until a lot of work has already been done (creation of CSV files and CYPHER files).
+
+It would be better to ensure that NEO4J access is working up-front, rather than generate an error after a significant amount of time.
+
+#2. Support python version 3 (currently only supports python version 2.7)
+
+The effort for these items is low to medium, less than a day for the first and perhaps two days for the second.
+","The code that creates the SNOMED CT core can be improved by the following
+
+#1. Validate that the interface to NEO4J is working,
+    and specifically that LOAD CSV commands will work.
+
+Currently, if there is a NEO4J issue ... it is not determined until a lot of work has already been done (creation of CSV files and CYPHER files).
+
+It would be better to ensure that NEO4J access is working up-front, rather than generate an error after a significant amount of time.
+
+#2. Support python version 3 (currently only supports python version 2.7)
+
+The effort for these items is low to medium, less than a day for the first and perhaps two days for the second.
+
+#3. Ensure that all errors that occur are logged in build.log
+
+If the LOAD CSV command fails, the reason for the failure needs to be logged in build.log so a user can use that to inform them of the exact problem that is occurring.
+"
+34,13:00:40-05:00,jpedersen,comment,1,
+13,14:10:58-05:00,campbell,cc,campbell@unmc.edu,"campbell@unmc.edu, wcampbel@unmc.edu"
+13,14:10:58-05:00,campbell,comment,9,
+13,14:13:39-05:00,campbell,comment,10,"Expanded architecture document to include ontology builds and sample of structured data extraction.  Attached as updated 'PROTOCOL FOR ENTERPRISE ANTIBIOGRAM'
+
+It was obvious at our last discussion that the srchitecture of the Graph database is not my forte, so I included just an ER graphic for mock-up
+Jim"
+9,09:46:15-05:00,campbell,comment,26,"Conference call with Harvard this date agreed:
+1) a) tootltip changes to better show context
+b) Nebraska to publish i2b2 meds metadata for trial use asap
+2) Nebraska to prepare documentation and advice on use
+3) Nebraska to review 14k code modifications provided by Jeff Klann in attached file (moved_rxnorm.xlsx) and respond regarding reasons for change
+4) Fall AMIA i2b2 meeting to focus on medication metadata use cases and SCILHS standardization
+5) (Medication ETLs to other Epic sites discussed only)"
+3,11:19:18-05:00,wcampbel,comment,13,JRC to wrap up this week.
+4,11:19:54-05:00,wcampbel,comment,9,JRC to tell WSC what needs to be done in JRC's absence.
+9,11:28:42-05:00,wcampbel,comment,27,"RxNorm to SCILHS issues identified as history management.  Murphy and Klann have not responded.  JGP/JRC to discuss tooltip enhancements.
+
+Yesh to have lab metadata done by tomorrow end of day.
+
+Jay to issue modifiers for SNOMED CT dx's (problem list vs. encounter Dx) to Klann, Murphy"
+13,11:35:09-05:00,wcampbel,comment,11,Reviewed JRC's updated model.  Instantiation  pending new hire.
+19,11:42:29-05:00,wcampbel,comment,5,"Still waiting on JAMIA response to reviewers for Wonky manuscript.
+
+JRC/JGP to begin rewrite of RxNorm paper on ONC deficiencies (Do ONC terminologies meet desiderata criteria for use?  Also, for historical management of medications.)
+
+WSC awaiting final feedback from Alexis Carter, Mark Routbort
+
+Discuss Spring AMIA later this week."
+28,12:02:19-05:00,wcampbel,comment,1,Refer to SCILHS items
+30,12:02:42-05:00,wcampbel,comment,3,Still in WSC's court
+35,12:05:28-05:00,wcampbel,comment,1,WSC to get involved with group this week to move project ahead
+32,12:07:57-05:00,wcampbel,comment,4,"New user in oracle for Capricorn to create schema.
+
+Yesh to have tables to share and distribute to Capricorn by Friday.  Yesh to share data definition on tables with JRC today."
+33,23:39:55-05:00,jpedersen,comment,1,"http://neo4j.com/docs/api/python-driver/current/
+
+There are some issues with the documentation at the site.  After obtaining a result, it can only be processed once.  It is consumed in a loop such as:
+
+  result = tx.run(""MATCH (a:Person) return a"")
+  for record in result:
+     <do something with record>
+
+After this loop is done, the result is gone.  So ... be aware of this.
+
+"
+3,11:12:53-05:00,wcampbel,comment,14,WSC to publish delta release today (s/p creation of observables for histo type by organ system)
+9,11:20:55-05:00,wcampbel,comment,28,"JRC to review Yesh's work.  On hold until JRC returns for additional edits/config.
+
+JGP still to work on modifiers to Klann/Murphy"
+19,11:27:04-05:00,wcampbel,comment,6,"JAMIA accepted wonky manuscript
+
+JGP working on RxNorm paper
+
+9/20 due date for Spring AMIA.  ??? on manuscripts"
+20,11:48:46-05:00,wcampbel,comment,14,"1.  PC/WSC to investigate.
+2.  WSI to get SCTID's for all Path Dx metadata nodes by today???
+3.  WSC to publish NE Lex with melanoma and Path Dx nodes.
+4.  JGP to install NE lex into prod and test and dev
+5.  WSC to publish NEC meta paths to JGP and PC"
+32,11:50:59-05:00,wcampbel,comment,5,Yesh to email Capricorn and determine if changes needed to tables
+37,11:56:58-05:00,wcampbel,comment,1,GO should be ready to test this week.
+37,11:57:32-05:00,wcampbel,description,"Reporting of molecular path data to graph via HLZ, JSON","Reporting of molecular path data to graph via HL7, JSON"
+37,11:57:32-05:00,wcampbel,comment,2,
+9,11:06:44-05:00,wcampbel,comment,29,"Yesh's work still on hold until JRC's review upon his return from holiday
+
+JGP to do this week."
+35,11:11:59-05:00,wcampbel,comment,2,"Meeting was successful.  Import worked on limited data set.  Viewed in flow sheet.  Susan Griffith at NM lab IT working on it
+
+Copath will need to change interface to manage LOINC codes in OBX 3.1 OR EPIC will need to accommodate SNOMED CT in OBX 3.1"
+36,11:12:56-05:00,wcampbel,comment,1,No issue.  Centered on consult cases where no parts would be in house.
+36,11:13:12-05:00,wcampbel,status,new,closed
+36,11:13:12-05:00,wcampbel,resolution,,fixed
+36,11:13:12-05:00,wcampbel,comment,2,
+32,11:14:10-05:00,wcampbel,comment,6,Yesh waiting to hear from Capricorn if distribution files acceptable.
+13,11:15:01-05:00,wcampbel,comment,12,Jay and Phil to interview candidates this week and inform WSC regarding impressions.
+20,11:34:43-05:00,wcampbel,comment,15,"WSC - Created SNOMED CT codes for all malignant histology type questions.  Published on Saturday night including full NE Lexicon update.
+  
+WSC - reviewed all cases in NE CARES without synoptic data.  Encoded answers.  Will review with Geoff Talmon tomorrow to finalize.  Then, will add to NE CARES with Jay's ""canned"" query.
+
+JGP - scripts ready for review.  OK'd by PC and WSC.  Jay to run test scripts on dev today for review.   Will share with PC.
+
+JGP to load new NE Lexicon tomorrow.
+
+WSC to complete GUI_meta worksheet by Wednesday."
+33,09:16:33-05:00,jpedersen,priority,major,minor
+33,09:16:33-05:00,jpedersen,comment,2,
+9,10:37:13-05:00,jpedersen,comment,30,"JGP investigation (concludes that nothing additional needs to be sent for DIAGNOSIS)
+
+I believe that we do not need to send anything further related to the DIAGNOSIS metadata to Harvard, per the following:
+
+SCHILS METADATA already includes modifier metadata for the condition status values of Active, Resolved and Inactive.  They use the following MODIFIER_CD values to indicate this:
+
+{{{
+CONDITION_STATUS:AC -- Active
+CONDITION_STATUS:IN -- Inactive
+CONDITION_STATUS:RS -- Resolved
+}}}
+
+This can be found by the following query of the SCILHS metadata:
+{{{
+select * from SCILHS_METADATA where m_applied_path<>'@' and M_APPLIED_PATH like '\PCORI\DIAGNOSIS\%' and c_basecode like 'CONDITION_STATUS%'
+}}}
+
+These correspond to the metadata codes that we had defined for Active, Resolved and Deleted:
+{{{
+DX|PROB:ACTIVE
+DX|PROB:DELETED
+DX|PROB:RESOLVED
+}}}
+
+I believe that they do not need these definitions, as they already have modifier metadata for these semantics.  The difference from theirs and ours is the specific MODIFIER_CD values which are used when publishing the Problem List facts.
+
+We may want to change our codes match theirs in our i2b2 ETL for PROBLEM LIST and in our PROBLEM LIST metadata.
+"
+9,10:37:13-05:00,jpedersen,_comment0,"JGP investigation and fixing of this issue is still in progress, to complete this week.
+
+It was determined that there should be 3 modifier metadata items related to SNOMED CT diagnoses -- for ACTIVE, RESOLVED and DELETED.  These were not delivered to Jeff Klann and Sean Murphy on July 2 when the DIAGNOSIS metadata was sent to them.
+
+Specifically, this is for MODIFIER_CD values in the facts of
+{{{
+DX|PROB:ACTIVE
+DX|PROB:DELETED
+DX|PROB:RESOLVED
+}}}
+
+These need to be applied to the following paths in SCHILS DIAGNOSIS
+
+{{{
+\PCORI\DIAGNOSIS\SM\%
+}}}
+
+This will be sent to Harvard this week.
+",1503935630049275
+9,10:37:13-05:00,jpedersen,_comment1,"JGP investigation (concludes that nothing additional needs to be sent for DIAGNOSIS)
+
+I believe that we do not need to send anything further related to the DIAGNOSIS metadata to Harvard, per the following:
+
+SCHILS METADATA already includes modifier metadata for the condition status values of Active, Resolved and Inactive.  They use the following MODIFIER_CD values to indicate this:
+
+{{{
+CONDITION_STATUS:AC
+CONDITION_STATUS:IN
+CONDITION_STATUS:RS
+}}}
+
+This can be found by the following query of the SCILHS metadata:
+{{{
+select * from SCILHS_METADATA where m_applied_path<>'@' and M_APPLIED_PATH like '\PCORI\DIAGNOSIS\%' and c_basecode like 'CONDITION_STATUS%'
+}}}
+
+These correspond to the metadata codes that we had defined for Active, Resolved and Deleted:
+{{{
+DX|PROB:ACTIVE
+DX|PROB:DELETED
+DX|PROB:RESOLVED
+}}}
+
+I believe that they do not need these definitions, as they already have modifier metadata for these semantics.  The difference from theirs and ours is the specific MODIFIER_CD values which are used when publishing the Problem List facts.
+
+We may want to change our codes match theirs in our i2b2 ETL for PROBLEM LIST and in our PROBLEM LIST metadata.
+",1503935681591977
+9,11:05:23-05:00,wcampbel,comment,31,JRC/JMcClay need to weigh in on Jay's proposed approach.
+37,11:07:12-05:00,wcampbel,comment,3,"PC to finish setting up receivers on .94 and also stream/store data in folders (PC working to complete).
+
+Once complete, PC will coordinate with GO to start testing.  To do/complete today, 8/28."
+32,11:09:04-05:00,wcampbel,comment,7,Yesh in communication with Capricorn.  Jay will weigh in and help Yesh respond to Capricorn questions.
+20,11:24:53-05:00,wcampbel,comment,16,"1.  WSC produced final NE Lex for load to support GUI
+2.  WSC has encoded all non-synoptic specimens.
+3.  WSC to complete NEC-Meta Map worksheet for prod for case Dx and get to Jay.  Autoload?
+4.  JGP had run de-id in dev for pat, cases, case parts and paraffin specimens.  Documented.  Can apply to prod when ready.
+5.  JGP has run NEC_meata edges in dev with test worksheet for case Dx.
+6.  JGP developed 8 test queries.
+7.  Phil to review 8 test queries
+8.  JGP to load NE Lex in prod and test and dev today
+"
+39,12:48:08-05:00,jpedersen,status,new,assigned
+39,12:48:08-05:00,jpedersen,owner,wcampbel,jpedersen
+39,12:48:08-05:00,jpedersen,comment,1,
+39,12:48:42-05:00,jpedersen,description,"We need to load the latest NE Lexicon full release into TEST and PROD.
+It has all the necessary ObjectConcepts to support NEC_Meta nodes.
+
+Location in BOX:
+{{{
+SNOMED_CT_release files\SnomedCT_Release_INT_20170825-0908.zip
+}}}
+","We need to load the latest NE Lexicon full release into TEST and PROD.
+It has all the necessary {{{ObjectConcepts}}} to support NEC_Meta nodes.
+
+Location in BOX:
+{{{
+SNOMED_CT_release files\SnomedCT_Release_INT_20170825-0908.zip
+}}}
+"
+39,12:48:42-05:00,jpedersen,comment,2,
+39,12:49:09-05:00,jpedersen,description,"We need to load the latest NE Lexicon full release into TEST and PROD.
+It has all the necessary {{{ObjectConcepts}}} to support NEC_Meta nodes.
+
+Location in BOX:
+{{{
+SNOMED_CT_release files\SnomedCT_Release_INT_20170825-0908.zip
+}}}
+","We need to load the latest NE Lexicon full release into TEST and PROD.
+It has all the necessary {{{ObjectConcept}}} codes to support NEC_Meta nodes.
+
+Location in BOX:
+{{{
+SNOMED_CT_release files\SnomedCT_Release_INT_20170825-0908.zip
+}}}
+"
+39,12:49:09-05:00,jpedersen,comment,3,
+9,11:25:57-05:00,wcampbel,comment,32,"RXNorm - Jay working on NLM history files and processing. Jay/JRC are building history references as NLM's version was incomplete.
+
+LOINC - Yesh loaded into observables node.  JRC to review and compare to Klann's hierarchy.
+
+SNOMED - No change.  Use July 2017 release, US extension and NE Lexicon.  Clinical findings and situations.  Yesh to complete for most recent release of SNOMED by 10/1."
+35,11:30:16-05:00,wcampbel,comment,3,"WSC adding/curating LOINC, SNOMED and Copath crosswalk done by today."
+37,11:44:04-05:00,wcampbel,comment,4,WSC/JGP/PC to address this week.  Exemplar to JRC for UGM
+32,11:56:44-05:00,wcampbel,comment,8,"Yesh completed.  Capricorn ok with release.  Now, NDC history files need to be built similar to what is required for SCILHS"
+39,12:09:40-05:00,wcampbel,comment,4,Completed.
+30,12:12:54-05:00,wcampbel,comment,4,WSC to do this sweek
+9,14:36:59-05:00,jpedersen,comment,33,"RXNORM information:
+
+!RxNorm history files dating back to 2005:
+https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html
+
+NLM's !RxNorm history API:
+https://rxnav.nlm.nih.gov/RxcuiHistoryAPIs.html#"
+9,14:36:59-05:00,jpedersen,_comment0,"RXNORM information:
+
+RxNorm history files dating back to 2005:
+https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html
+
+NLM's RxNorm history API:
+https://rxnav.nlm.nih.gov/RxcuiHistoryAPIs.html#",1505763459650171
+39,13:51:54-05:00,jpedersen,status,assigned,closed
+39,13:51:54-05:00,jpedersen,resolution,,fixed
+39,13:51:54-05:00,jpedersen,comment,5,
+9,12:25:08-05:00,wcampbel,comment,34,"Yesh to review CBC with and w/o diff models.  No diff data.
+
+Jay to write up documentation on how to run/execute load scripts, and metadata.  Yesh to attempt to execute.  Must be done, validated and prod ready by 10/31.  To be shared at AMIA on 11/5"
+35,12:27:50-05:00,wcampbel,comment,4,"Meeting on Thursday with EPIC/UNMC team.  AP cases.  All cross walk work done.  String issues with Copath to be discussed.
+
+WSC/JRC to meet with Lancaster to discuss load of MP data into EPIC."
+3,12:29:58-05:00,wcampbel,comment,15,JRC to review terminology inventory.  WSC to review vs. COPATH
+26,12:44:21-05:00,wcampbel,status,new,closed
+26,12:44:21-05:00,wcampbel,resolution,,duplicate
+26,12:44:21-05:00,wcampbel,comment,9,
+37,12:56:59-05:00,wcampbel,comment,5,Observables must submitted to RII for LOINC codes
+9,11:10:20-05:00,jpedersen,comment,35,"LOINC load still to do.  Work on SHRINE load to Postgres occurred last week, but issues determined with duplicate keys for the OBSERVATION_FACT table.  GPC wants SHRINE by Monday, per meeting of Carol Geary with GPC personnel.  Metadata needs to be available (SCILHS) in two weeks -- Medications and Labs (Jay and Yesh)."
+3,11:16:36-05:00,jpedersen,comment,16,"JRC contacted Swap last week to obtain needed codes, call with them this Wed morning.  
+
+NEXT: Wed morning meeting.  WSC and JRC to meet Tuesday morning as well."
+13,11:24:15-05:00,jpedersen,comment,13,"Nick Staffend started today (Oct 9, 2017).  Working on training in Blackboard.  Waiting on computer, has been ordered.  Needs to go through CITI training to allow work on systems with PHI."
+19,11:34:16-05:00,jpedersen,comment,7,"JRC,JGP -- Started communications last week with Olivier Bodenreider concerning updating the previous paper with historicity information being provided by NLM APIs.
+
+WSC,JRC -- Manuscript on implementing molecular pathology, WSC started paper about 6 mo ago, has received feedback from Greiner and others.  JRC to review.  From sequencer to EHR -- thrust of paper.
+
+Spring AMIA podium abstracts -- two submitted, WSC and JGP+BG+etal.
+
+IDea CTR meeting on Oct 23 -- JGP to present poster.
+  "
+20,11:38:55-05:00,jpedersen,comment,17,"Meteor app was down, JGP restarted this morning.
+
+NEXT STEP:  Need to investigate if the app is starting on system boot.  JGP and Phil.
+
+Upcoming date: due for usage by Geoff Tolman on Oct 25.
+
+Geoff Tolman agreed to video demonstration of using reporting capabilities, online video.
+
+WSC -- ask Geoff for use cases to demonstrate in video.
+
+Wed mtg -- discuss roles for users, may be able to implement by Oct 25.
+"
+20,11:38:55-05:00,jpedersen,_comment0,"Meteor app was down, JGP restarted this morning.
+
+NEXT STEP:  Need to investigate if the app is starting on system boot.  JGP and Phil.
+
+Upcoming date: due for usage by Geoff Tolman on Oct 25.
+
+Geoff Tolman agreed to video demonstration of using reporting capabilities, online video.
+
+WSC -- ask Geoff for use cases to demonstrate in video.
+",1507567191797346
+30,11:45:45-05:00,jpedersen,comment,5,"JRC -- folding in CDA to this item, so not done yet.
+
+WSC -- sending email re:CDA, after discussions with JRC"
+30,11:45:45-05:00,jpedersen,_comment0,"JRC -- folding in CDA to this item, so not done yet.",1507567586911008
+29,11:49:20-05:00,jpedersen,comment,11,HL7 messages to be put into database for ETL by JRC.  Phil to work on that.  Synoptic data from copath to be dropped into MySQL.
+32,11:51:56-05:00,jpedersen,comment,9,"Will be created after updated SCILHS Medications work, to have complete RXCUI and NDC codes.
+
+NEXT: metadata build for RxNorm is occurring this week."
+35,11:54:27-05:00,jpedersen,comment,5,WSC will attempt to meet with Lancaster tomorrow.
+35,08:38:38-05:00,wcampbel,comment,6,WSC coordinating time to meet with Brian Lancaster.  Brian would like to discuss f2f
+9,11:26:25-05:00,wcampbel,comment,36,"SNOMED - WSC/JRC to review RF2 from Snowowl.  Yesh sees issues with observable entity concepts missing.  Once resolved, Yesh to correct and test install procedures. (Clinical findings, events and situations); Lab observables
+
+RxNorm - 1) tooltips;, 2) New NLM API; 3) HCPCS (JRC to review Bodenreider comments and commnunicate to JGP: 4) Check for completeness;
+
+Create CSV files for all rxnorm, snomed and labs(loinc)
+
+WSC to reach to Musen to discuss distribution details...assuming success"
+20,11:29:11-05:00,wcampbel,comment,18,Demo to Pathology on Thursday.  Add security level functionality for identified and deid data.
+37,11:33:12-05:00,wcampbel,comment,6,"Phil to reprocess the data from GO to test for validation.  Once validated, turn on for production and upon trigger events (i.e., as cases signed out)
+
+Need to verify with RITO our disc space is sufficient on prod"
+3,11:34:53-05:00,wcampbel,comment,17,WSC will load Copath with NE Lexicon id's for production by 11/1 or sooner
+4,11:36:51-05:00,wcampbel,comment,10,No new development for next two weeks.  JRC relocating to the Rocky Mountains.
+32,11:40:05-05:00,wcampbel,comment,10,Yesh waiting on new RxNorm and NDC build and will rebuild for Capricorn
+9,11:33:26-05:00,wcampbel,comment,37,"1. SNOMED CT (Dx, events, situations) loaded, Jay has csv file for transfer to NCBO.
+
+2. RxNorm (Jay, added tool tips with NDC, NDF-RT hints, links).  Needs to work on historicity component with NDC/RxNorm
+
+3. LOINC/Observables - almost done.  Tool tips needed.  Adding panels"
+37,11:36:57-05:00,wcampbel,comment,7,"SC to validate results in NE CARES test from import.
+
+Curate dx and disorder SCTID's"
+32,11:39:46-05:00,wcampbel,comment,11,No change
+20,11:47:52-05:00,wcampbel,comment,19,"PHIL to JAY/SCOTT
+I wanted to finish the changes requested by Geoff and company, but after making the necessary changes was not finding any results, and uncovered a few issues.
+ 
+NECARES was never updated to add any deidentified fields when adding data
+Mirth processing for loading synoptic reports does create patients, cases, and links to case parts, but does nothing with deidentified data
+When you created deidentified fields in the existing product, ParaffinSpecimen, that contains case, patient, and case part type, was not deidentified
+ 
+NECARES will create ParaffinSpecimen, but makes no attempt to link the tissue specimen with a patient record, by design, as typically patient information is not known. I also don’t remember any discussion about linking the paraffin specimen to a patient record, but it seems to me we should not be putting patient and case information in ParaffinSpecimen, and if necessary creating a patient record and link the patient record to the ParaffinSpecimen..
+ 
+I found the nodes (NEC_DeidSequence) you created to keep track of the next sequence number, so I will need to update NECARES, but we do need to decide if NECARES should create patient records. I hate to have information in multiple locations.
+ 
+Let me know your thoughts."
+41,14:44:28-06:00,jpedersen,status,new,closed
+41,14:44:28-06:00,jpedersen,resolution,,wontfix
+41,14:44:28-06:00,jpedersen,comment,1,"Moved to NE CARES TRAC, ticket #29."
+42,14:47:03-06:00,jpedersen,status,new,closed
+42,14:47:03-06:00,jpedersen,resolution,,duplicate
+42,14:47:03-06:00,jpedersen,comment,1,"Moved to NE CARES TRAC, ticket #30."
+34,14:54:19-06:00,jpedersen,status,assigned,closed
+34,14:54:19-06:00,jpedersen,resolution,,duplicate
+34,14:54:19-06:00,jpedersen,comment,2,"Moved to GRAPHDB TRAC, ticket #2."
+33,14:57:00-06:00,jpedersen,status,assigned,closed
+33,14:57:00-06:00,jpedersen,resolution,,duplicate
+33,14:57:00-06:00,jpedersen,comment,3,"MOved to GRAPHDB TRAC, ticket #3."
+38,14:59:19-06:00,jpedersen,status,assigned,closed
+38,14:59:19-06:00,jpedersen,resolution,,duplicate
+38,14:59:19-06:00,jpedersen,comment,1,"Moved to NE CARES TRAC, ticket #31."
+43,10:26:12-06:00,jpedersen,comment,1,"Historical comments from i2b2 TRAC, duplicate ticket #385
+
+comment:7 Changed 9 months ago by jmcclay
+Jay-Install to i2b2 
+If working well copy to Babel to inform GPC
+Ask for comments
+Confer with J Klann as to where to expose to SCILHS community
+
+comment:8 Changed 8 months ago by jmcclay
+Finishing Meds
+Labs next
+
+comment:9 Changed 8 months ago by campbell
+Medication modifiers installed per SCILHS+. ETL revision to procedure HERONLOADER.OBS_FACT_UNMC_RX_DISP_PROCN encounters this error on execution:
+[Error] Script lines: 1-10 -------------------------
+ExecuteCallableQuery?: Execute: ORA-28500: connection from ORACLE to a non-Oracle system returned this message:
+[Oracle][ODBC SQL Server Wire Protocol driver][Microsoft SQL Server]Cannot drop the table 'OBS_FACT_RX_DISPENSE_REPORTS', because it does not exist or you do not have permission. {42S02,NativeErr? = 3701}
+ORA-06512: at ""HERONLOADER.OBS_FACT_RX_UNMC_DISP_PROCN"", line 18
+ORA-06512: at line 2 
+
+comment:10 Changed 8 months ago by jmcclay
+RxNORM metatdata in place
+modifiers being tested
+
+comment:11 Changed 8 months ago by campbell
+RXNORM metadata has open issue with ingredient; will discuss with GPC Tuesday
+
+comment:12 Changed 8 months ago by campbell
+YN reviewing and planning code build for Lab metadata
+
+comment:13 Changed 7 months ago by jmcclay
+Medications finished - awaiting q/a by Jeff K
+
+comment:14 Changed 7 months ago by jmcclay
+Milestone:	→ SCILHS - SHRINE
+
+comment:15 Changed 7 months ago by jmcclay
+Part of Bret's assignment for procedures. 
+
+comment:16 Changed 5 months ago by jmcclay
+work started on diagnosis portion
+Need to clean up procedures (ICD9 and CPT are not displaying)
+
+comment:17 Changed 5 months ago by jmcclay
+Diagnosis finished with addition of SNOMED CT problem codes
+Implemented with a transitive closure table (because i2b2 metadata design does not deal with poly hierarchies)
+Need to share with Jeff Klann
+CPT is licensed by AMA
+
+comment:18 Changed 5 months ago by jmcclay
+Jeff Klan responded today
+Just sent Diagnosis (SMOMED) metadata to Jeff today
+2 versions Transitive closure and concept path
+Also need to get metadata together for MEDS. Ours is much expanded.
+
+comment:19 Changed 4 months ago by jpedersen
+A problem was discovered with the Diagnosis (SNOMED) metadata previously sent to Jeff Klann. 
+This was determined on Friday, June 30.
+A fix for the issue was created two days later on Sunday, and sent to Jeff Klann on the same day (Sunday July 2). This metadata is based on using the concept_dimension, which is more in keeping with the rest of the SCILHS metadata.
+NOTE: The results of several queries involving all 3 SNOMED hierarchies relating to diagnosis (findings, events, situations) were compared to the results of a transitive-closure based version of the same information. The results matched in all tested cases.
+
+comment:20 Changed 4 months ago by jmcclay
+Updated medication metadata with the addition of modifers
+Sent to Jeff Klan
+Fixed slow opening in 982b2 with an H level index
+Meeting scheduled for Aug 2 with Harvard
+
+comment:21 Changed 3 months ago by jmcclay
+No current activity
+1) Snow/Shrine? agreement
+2) get Harvard to agree on expanded metadata
+3) RxNorm? historical codes missing
+Create RxNorm? history file from all past releases in order to get coverage - Yesh
+Aug 2 mtg with Harvard - need documentation on metadata path proliferation
+same code in multiple hierarchies
+Need to complete report and upload to ticket
+Need documentation on metadata structures - Jay and Yesh
+
+comment:22 Changed 3 months ago by jmcclay
+Awaiting J Klan response on RxNorm?.
+
+comment:23 Changed 2 months ago by jmcclay
+Chase down comprehensive RxNorm? Codes - jmcclay will query HL7 participants
+
+comment:24 Changed 6 weeks ago by jmcclay
+NDC codes are 99%+ complete
+
+comment:25 Changed 5 weeks ago by jmcclay
+Owner:	changed from campbell to ashok.mudgapalli@unmc.edu
+
+comment:26 Changed 5 weeks ago by jmcclay
+Dr. Campbell will contact Tony French, loop in RITO.
+
+comment:27 Changed 3 weeks ago by jmcclay
+Owner:	changed from ashok.mudgapalli@unmc.edu to Jay.Pedersen@unmc.edu
+
+comment:28 Changed 3 weeks ago by jmcclay
+Medications in progress - updating ndc/rxnorm mapping process based on new NLM API - Jay
+Labs - building ontology based on new RF2 file - Yesh due for AMIA
+Latest Neb Lexicon
+Also defining groupers
+
+comment:29 Changed 2 weeks ago by campbell
+1) LOINC initial build completed; editing for contenht
+2) RXNORM still short of codes; testing new NDC API; J-codes pending
+3) SNOMED CT done
+
+comment:30 Changed 3 days ago by jpedersen
+↳ Reply   ✎ Edit
+Summary:	Enhance, install and test SCILHS metadata 2.20+ → SCILHS Medications Metadata -- should have complete historical set of RXCUI orderable drugs"
+9,11:09:38-06:00,wcampbel,due_date,,
+9,11:09:38-06:00,wcampbel,comment,38,"Jay will update the SNOMED CT for US release by Wednesday am.  
+
+JRC/WSC to discuss with Jeff Klann on Wednesday, and with Mark Musen thereafter for NCBO distribution."
+37,11:25:03-06:00,wcampbel,due_date,,
+37,11:25:03-06:00,wcampbel,comment,8,Phil is free to proceed with moving GO data into production NE CARES
+13,11:26:01-06:00,wcampbel,due_date,,
+13,11:26:01-06:00,wcampbel,comment,14,"JRC, WSC, NS to meet to discuss this week."
+43,11:28:30-06:00,wcampbel,comment,2,Jay to work on this week.  Need to complete for SCILHS release
+29,11:33:26-06:00,wcampbel,due_date,,
+29,11:33:26-06:00,wcampbel,comment,12,Jay/Yesh to develop a plan to load into i2b2 AFTER all SCILHS metadata work is done
+32,11:36:47-06:00,wcampbel,due_date,,
+32,11:36:47-06:00,wcampbel,comment,12,Yesh to process historical data and prepare for release.  Yesh to coordinate with Jay
+9,11:16:19-06:00,campbell,comment,39,"Review of metadata in MEDICATIONS showed complete list of RXCUI and NDC codes for RCR research file. 
+LOINC lab metadata concluded.
+DIAGNOSES updated with latest SNOMED CT and Nebraska lexicon"
+44,11:42:37-06:00,jpedersen,comment,1,"The SCILHS DIAGNOSIS metadata has been updated from the NE Lexicon Nov 13 RF2 and sent to Jeff Klann at Harvard for review (sent Friday, Nov 17, 2017)."
+44,11:42:37-06:00,jpedersen,_comment0,The SCILHS DIAGNOSIS metadata has been updated from the NE Lexicon Nov 13 RF2 and sent to Jeff Klann at Harvard for review.,1511199777201918
+43,11:44:45-06:00,jpedersen,comment,3,"Work in progress.  Received comprehensive list of RXNORM codes on Nov 1, 2017 from Lee Peters at the NLM, as directed by Olivier Bodenreider.  We are processing this information and working on determining the the ingredients and NDC codes of the historical codes."
+20,11:45:38-06:00,jpedersen,due_date,,
+20,11:45:38-06:00,jpedersen,comment,20,Developing metadata for Cancer Stage and Grade properties.
+43,13:15:05-06:00,jmcclay,comment,4,This is blocking RCR data load into i2b2
+9,09:25:40-06:00,campbell,comment,40,"Hi Jim,
+
+I spent a chunk of time examining the list of 19,462 ""Never Active"" orderable drugs
+from the comprehensive history file from the NLM (Nov 1, 2017).  I can tie 18,813
+of them to ingredients by parsing the names.  I cant do that for 649 of them.
+Of the 90 codes we were missing, 79 belong in the set of 18,813 which can be tied
+to ingredients.  10 belong to the set of 649 that cant be tied to an ingredient.
+
+One code, 853442, was a different code type altogether -- type OCD
+(code 853442, Testotop TTS 15mg transdermal patch).  That code has 24 occurrences in our fact table.
+
+I did not dig any further into NDC codes yet.
+
+DETAILS
+
+Using the parsing heuristic suggested by Olivier, I was able to tie 18,813
+of these to one or more ingredients.  That is, by parsing the drug name to
+extract its ingredient ... and then performing an exact match against
+the known ingredient names.
+
+That means that 649 could not be tied to ingredients using the heuristic that I coded,
+extending what Olivier suggested somewhat.
+
+Consider the 90 RXNORM codes from our fact table which did not map to our metadata.
+
+Of these:
+  79 are in the set of 18,813 'never active' drugs that I could tie to a known ingredient
+  10 are in the set of 649 which I could not tie to an ingredient
+   1 was not an orderable drug at all, by our rule of SCD,SBD,GPCK,BPCK, it was of type 'OCD', code 853442
+
+The OCD codes are another can of worms.
+
+This particular code, in the history file, has the following definition:
+
+853442 Never Active
+Testotop TTS 15mg transdermal patch OCD
+72009 72009
+
+So ... we have to discuss, how to deal with these codes ... or if we are going to deal with them.
+
+I can incorporate the 18,813 into our existing structure ... by ingredient.  I can't do that for the 649.
+
+We could create a 'Never Active' section in the metadata to accomodate them.
+"
+9,09:50:22-06:00,campbell,comment,41,"I propose for resolution:
+1) All 'never active' codes we include in metadata should be flagged as such, like you have done for 'retired'.  Dates of first reference should be included if we can get them.
+2) We should focus on complete metadata for all codes we have in our database.  Pass me the 11 codes (10 SBD/SCD and one OCD) that could not be mapped to an ingredient and I will do that by hand with references back to you for our history file.
+3) The large number of 'never active' codes that you mapped to ingredient should be handed to me for brief quality check and then we should include them in our metadata as history since other sites may have employed them.  All others that could not be parsed and mapped should be placed in a bucket in the 'ingredient' schema under 'Undocumented ingredient' so that we can verify their status if they come up in future queries.
+4) The 'Testotop' brand of OCD should be mapped to RXCUI 10379 as ingredient and placed in our metadata as soon as we know what an 'OCD' might be.
+"
+9,10:18:04-06:00,campbell,comment,42,"I notice that NDCs for SBD and SCD are all mapped together and that SBD are not labeled with the brand name.  Although the use cases for searching for branded drugs excluding generics is rare, I think the hierarchical organization could be better here, with NDCs for branded products only pointing to SBD/BPCK and with the branded clinical drugs including their brand name."
+9,10:33:31-06:00,campbell,comment,43,We have 2.3M NDC facts - dispense and administration events not  within our metadata.  These need to be organized in metadata hierarchy for SCILHS.
+9,11:22:28-06:00,wcampbel,comment,44,"1. 6500 NDC codes without a map to the ingredient.  (Jay to assemble codes and communicate to JRC via ticket.  JRC to compare with First Data/EPIC load.) Today
+
+2. Jay to contact Olivier B. about item #1. Today
+
+3. JGP Move ahead without ""Never used"" ingredients that we cannot find maps for ~ 600. During week.
+
+4. Observables (metadata XML)...Yesh to see if Brett is working on this.  (ranges, values of results)
+
+5. ICD10-PCS, SNOMED CT, CPT4, HCPCS, ICD-9-CM are required for metadata layer for SCILHS  (Take current UNMC content and SCILHS content and merge for a comprehensive procedure metadata file release) - YESH  (See ticket in i2b2 573)"
+43,11:23:37-06:00,wcampbel,comment,5,See ticket #9
+44,11:25:15-06:00,wcampbel,comment,2,"Jay to confirm that it is done.  If not, he will complete."
+35,11:31:30-06:00,wcampbel,due_date,,
+35,11:31:30-06:00,wcampbel,comment,7,"Epic needs to provide input on use of single LOINC term with differing uses across CAP worksheets.
+
+Next meeting is Thursday.
+
+"
+35,11:31:54-06:00,wcampbel,priority,major,blocker
+35,11:31:54-06:00,wcampbel,comment,8,
+29,11:33:42-06:00,wcampbel,comment,13,"No action.  SCILHS work not complete, yet"
+40,11:41:25-06:00,wcampbel,due_date,,
+40,11:41:25-06:00,wcampbel,comment,1,"1. Separate modules (pathology preview/synoptic lexicon/clinical lexicon) for independent release/sharing.
+
+2. JRC to complete NIN prior to sharing content.
+
+3. Timeline to Ian Green with updated I&E document.
+
+4. WSC to share selected I&E models with Pathologists as part of CSRWG."
+13,11:49:19-06:00,wcampbel,comment,15,"1.  Creation of maps for SQ data expressed only in NL.  Example: specimen source.
+
+2.  Document use case shared with NS in a sharable format for NS to discuss at Wednesday ICON meeting. SC to share and discuss with KUbben, TVanSchooneveld, PFey"
+45,11:52:37-06:00,wcampbel,comment,1,"NS, JRC and SC to fold this work into the ELIRT DB build"
+9,12:07:37-06:00,jpedersen,comment,45,"It is possible that when we install metadata for the ""never active"" rxnorm drug codes, that they will be associated with some of the missing 6554 NDC codes.  We will know that by the end of the week."
+9,12:07:37-06:00,jpedersen,_comment0,"Attachment added for 6500 NDC codes which are missing metadata -- ""the_6554_ndc_facts<snip>.xlsx""",1512417924692364
+46,10:14:41-06:00,jpedersen,comment,1,"Q: Semantic details of the WITH statement.
+
+Looking for documentation that details exactly when the WITH statement is needed and its exact semantics.
+
+What causes NEO4J variables to be dropped from scope?
+
+How do MATCH and OPTIONAL MATCH affect variable scope?"
+46,10:16:55-06:00,jpedersen,comment,2,"Q: Analog of GROUP BY and HAVING clauses of SQL.
+
+We believe there is a tie-in with the count expression, but would like to know if there is an exact methodology for replicating GROUP BY functionality in CYPHER."
+46,10:19:01-06:00,jpedersen,comment,3,"Q: Queries with many MATCH and OPTIONAL MATCH statements.  What happens if a MATCH in the middle does not find any matching nodes or edges?
+
+For example
+
+MATCH (a:dkdkdkdkdk)
+RETURN 'something'
+
+This does not return 'something', the result appears to be an empty list.  Does the RETURN statement in this CYPHER not execute due to the MATCH ""failure""?
+"
+46,10:28:44-06:00,jpedersen,comment,4,"Q:  How to spot queries that generate a cartesian product?
+
+Obvious case.
+
+MATCH (a:Type1)
+MATCH (b:Type2)
+
+Does not have any tie between the two node types, so all combinations will be generated.
+
+Would like a general outline of how to look for this issue.
+
+"
+46,10:29:42-06:00,jpedersen,comment,5,"Q: How to analyze the results of EXPLAIN and PROFILE of a CYPHER query?
+
+Semantics of the information returned by EXPLAIN and PROFILE, and the differences between these and an explanation of when to use one over the other.
+"
+46,10:58:37-06:00,jpedersen,comment,6,"Q: Is there a way to emulate a VIEW from SQL?
+
+This is asking if there is a way to save intermediate results.  This can be done partially through variables or through saving collections of matching identifiers of an intermediate result which can be fed into a MATCH statement.
+"
+46,14:08:57-06:00,jpedersen,comment,7,"Q: Is the wildcard relationship being deprecated.  e.g. (a)-[r:ISA*]->(b:Somenode)
+
+The browser interface to NEO 3.2.2 indicates that this is a deprecated feature.  Is it?
+
+What about specified ranges of edges?  For example:
+
+  match (a)-[r:ISA*1..2]->(b)
+"
+46,14:10:52-06:00,jpedersen,comment,8,"Q: Avoid EAGER queries reported by EXPLAIN or PROFILE.
+
+If the profile states that a query (match) is being processed with ""eager"" semantics, this is apparently expensive.
+
+What is the definition for eager query processing and how do we avoid it?
+
+"
+46,14:17:48-06:00,jpedersen,comment,9,"Q: is there a better method of handling NULL results than using FOREACH?
+
+e.g. Modify an attribute of a node, if the node exists
+
+OPTIONAL MATCH (pseq:ParaffinSpecimen {TsfBlockId: ps.TsfBlockId}) WHERE pseq.TsfBlockDeid IS NULL
+FOREACH (o in CASE when pseq is not null then [pseq] else [] | SET o.caseId = 'aModifiedValue')
+
+Can this be done with EXISTS?
+
+There apparently is a APOC method, APOC.do.when() with if-then functionality.  Can we rely on the APOC routines to always exist and maintain their syntax and semantics?
+
+e.g.
+
+https://stackoverflow.com/questions/43481472/if-else-with-cypher-neo4j
+
+CALL apoc.do.when(cl IS NOT NULL, 
+ ""DELETE tcr 
+  MERGE (t)-[:references]->(cl)"", '', {tcr:tcr, t:t, cl:cl}) YIELD value
+
+"
+46,14:19:27-06:00,jpedersen,comment,10,"Q: What are planner rules?  Why might we want to use them?
+
+We have run into issues where the browser NEO parser states that we have a problem in our planner rules.  We have not specified any, and the error occurs.  We would like to understand them.
+"
+9,11:38:12-06:00,jpedersen,comment,46,"As of this week, we have full historical RXNORM code coverage within SCILHS metadata.
+
+Our NDC code coverage is not historically complete, but covers 98% of our NDC facts.  Other facts are for things like glucose strips.
+
+We retrieved the latest SCILHS PROCEDURES metadata from Harvard's private ontology repository on github yesterday.  That will be installed into SCILHS_METADATA in the next couple of days.
+
+We are investigating the remainder of the SCILHS metadata up-to-date.
+
+We need to incorporate XML metadata for SCILHS LABS."
+9,11:42:30-06:00,wcampbel,comment,47,"JRC to address metadata XML for lab loinc next week.
+
+JGP to upload most recent metadata from Harvard github"
+37,11:50:24-06:00,wcampbel,comment,9,"GO/UNMC have working interface ready for prod NE CARES.  Waiting on GO to update production server in MP lab.  Then, this interface can go live.
+
+colon cancer will be first prototype for CDA implementation document"
+43,11:51:49-06:00,wcampbel,status,assigned,closed
+43,11:51:49-06:00,wcampbel,resolution,,duplicate
+43,11:51:49-06:00,wcampbel,comment,6,
+44,11:52:51-06:00,wcampbel,comment,3,JGP to complete and communicate status today.
+29,11:53:32-06:00,wcampbel,comment,14,No action.  Not quite ready to move on this ticket.
+19,12:11:41-06:00,wcampbel,due_date,,
+19,12:11:41-06:00,wcampbel,comment,8,"JRC - two XGM submissions
+
+Structuring micro results for enterprise antibiogram calculations - JRC to work on.  Due by Friday.
+
+WSC join meeting with EPIC on Monday and see if Epic is using terminology data layer or strings for organism identification/classification"
+40,12:30:37-06:00,wcampbel,comment,2,"Breaking the Lexicon into separate modules --
+  a. Historical clinical data
+  b. Lab Loinc Tech Preview
+  c. Anatomic and Molecular data for Synoptic Reports.
+
+A site should be able to only install Synoptic Reports if that is all they need.
+
+Current plan -- RF2 extract, and post-process the RF2 to break it into the 3 modules.
+Postprocess -- assign new module ids to the 3 areas.
+
+"
+28,12:31:49-06:00,wcampbel,due_date,,
+28,12:31:49-06:00,wcampbel,comment,2,Will be discussed with Harvard in January on scheduled call.
+28,12:32:57-06:00,wcampbel,comment,3,"NCBO?
+Harvard github?
+Other methods?"
+32,12:33:42-06:00,wcampbel,comment,13,Yesh to do next week after SCILHS data ready from Jay.
+13,12:47:06-06:00,wcampbel,comment,16,WSC/NS to address these items for Monday Micro meeting
+46,07:50:06-06:00,jpedersen,comment,11,"Q: Compare the Graph Database model to the relational model.
+
+List of specific functional capabilities in the graph model compared to the relational model.
+
+e.g. Graph algorithms -- finding ""shortest path"" between nodes is built-in function to NEO,
+     and has no direct analog in SQL.
+
+What are the selling points for NEO for shops that are entrenched in relational technology?
+"
+46,07:51:53-06:00,jpedersen,comment,12,"Q: Discuss the main use cases for NEO in the marketplace.
+
+e.g. Fraud detection?, Recommendation engines?, Data warehousing?
+
+Where possible, discuss the larger customers of NEO and their use cases for NEO.
+"
+46,07:53:19-06:00,jpedersen,comment,13,"Q: Discuss Java configuration and tuning.
+
+We have not modified the Java configuration for the NEO server, almost at all.  Discuss the cases where Java configuration might be needed and what kind of modifications are made."
+46,07:56:38-06:00,jpedersen,comment,14,"Q: Monitoring and tuning needed for a quickly growing graph database.
+
+We plan to have a much higher graph growth in the near future, in GO nodes being added.
+
+What kind of steps would a DBA follow to tune the performance of NEO for a growing database.
+
+What is the impact of large numbers of nodes, which may not be referenced often, on the performance of the database? "
+46,07:58:44-06:00,jpedersen,comment,15,"Q: NEO caching algorithm.
+
+Does NEO try to cache the entire database in memory, or only recently accessed nodes?
+
+This question relates to the quickly-growing graph scenario, and the impact of adding a large number of nodes which might be only rarely accessed.  Would such nodes be cached and stay in the cache? "
+46,08:02:43-06:00,jpedersen,comment,16,"Q: Graph modeling best practices.
+
+Is there a set of best practices?
+
+Specific question -- foreign key values.
+
+Are foreign key values in a node typically not used if there is an edge to the foreign node?  That is if there were a component node which had an edge to a part node, is the partId typically stored with the component node or just the edge?
+
+The question arises about recovery of information if the edges were every incorrectly removed, leaving the node without information leading to is related node."
+46,08:05:27-06:00,jpedersen,comment,17,"Q: Backing up a portion of a graph.  Copying nodes and edges between graphs.
+
+Is there a suggested method for being able to store the nodes and edges associated with a CYPHER query?  For example, is there a suggested method for moving a set of nodes and edges between two graphs (e.g. Production and Test graphs)?
+"
+46,08:08:51-06:00,jpedersen,comment,18,"Q: Methods of loading nodes.  Alternatives to LOAD CSV?
+
+We have made fairly extensive use of the LOAD CSV command to load our graph into an empty graph database.  We have also run into issues with the command having trouble finding the CSV file we specified in several instances.
+
+What other alternatives exist.  What alternatives work for loading nodes into a non-empty graph?  I believe some services require the graph to be empty."
+46,08:14:42-06:00,jpedersen,comment,19,"Q: NEO internals.
+
+We are interested in learning internals of the storage of nodes and edges and and indexes, on the disk.  We believe this will help us to make better-performing graph models.  Can this be discussed, or at least can we find some direction into the open-source Java code that could help us understand these issues?"
+46,06:36:33-06:00,jpedersen,comment,20,"Q: review the CYPHER we use for reports, can this be optimized?  Better/faster way to get this?"
+46,06:37:46-06:00,jpedersen,comment,21,Q: Compare the features of the NEO enterprise edition to the community edition.
+46,06:36:33-06:00,jpedersen,_comment0,"Q: review the CYPHER we use for reports, can this be optimized?  Better way to get this?",1513082872708101
+46,06:48:42-06:00,jpedersen,comment,22,Q: Review highlights of APOC library.  How well-supported is this?  Can we/should we rely on these routines?
+46,06:49:34-06:00,jpedersen,comment,23,Q: JavaScript interface to NEO.  Is there a preferred library?  One using the bold protocol?
+35,11:16:15-06:00,wcampbel,comment,9,WSC sent email to team to ensure meeting held on Thursday.
+9,11:18:20-06:00,wcampbel,comment,48,No progress last week due to training.
+46,11:19:03-06:00,wcampbel,status,new,closed
+46,11:19:03-06:00,wcampbel,resolution,,fixed
+46,11:19:03-06:00,wcampbel,comment,24,All addressed during training.
+3,16:00:30-06:00,wcampbel,status,new,closed
+3,16:00:30-06:00,wcampbel,due_date,,
+3,16:00:30-06:00,wcampbel,resolution,,fixed
+3,16:00:30-06:00,wcampbel,comment,18,Terminology added to Copath Test and production.  Codes associated with templates in Copath Test.  Milissa Gerken will copy templates from Test to Prod when appropriate for use in January 2018.
+48,09:52:50-06:00,campbell,comment,1,RF2 copy oof Nebraska Lexicon exported; concepts mapped to three separate moduleids and content submitted to B2I for RF2 data set revision
+48,09:53:33-06:00,campbell,status,new,accepted
+48,09:53:33-06:00,campbell,owner,wcampbel,campbell
+48,09:53:33-06:00,campbell,comment,2,
+48,11:09:29-06:00,campbell,comment,3,"Dear James R Campbell,
+
+We would like to acknowledge that we have received your request and a ticket has been created.
+A support representative will be reviewing your request and will send you a personal response.
+
+To view the status of the ticket or add comments, please visit 
+https://b2i.freshdesk.com/helpdesk/tickets/611
+"
+37,08:42:52-06:00,wcampbel,comment,10,"GO waiting for myeloproliferative panel to be validated before sending production data.
+
+WSC TT Allison Cushman, and she will try to complete validation this week."
+30,08:45:24-06:00,wcampbel,due_date,,
+30,08:45:24-06:00,wcampbel,comment,6,Complete before the holidays
+35,11:08:22-06:00,wcampbel,comment,10,Milissa Gerken working with Copath to determine if Interface Link field will resolve issue.  Update expected today.
+35,11:11:26-06:00,wcampbel,comment,11,Should add two tumor types to ensure that responses collate correctly.
+48,11:13:49-06:00,wcampbel,comment,4,"B2I received files from JRC - 
+
+JRC segregated concepts into three modules (NE Lexicon core, tech preview, pathology).  B2i working on recalculating module dependencies.  We need their final RF2 files to complete this task."
+9,11:25:21-06:00,wcampbel,comment,49,"Jay to update today to the September release for US  (Diagnoses)
+
+Jay to use latest NE Lexicon files.  JRC to upload those to: \Box Sync\Scott_Campbell_Lab\Research\BD2K-U01_Project Folder\RF2 Nebraska lexicon
+
+Modifier metadata required for procedures (to disambiguate ICD-9 and 10 procedure vs. other semantic).  JRC will coordinate with Jay.
+
+LOINC/Observables up to date
+
+RxNorm/NDC -updated our modeling vs. what we had previously sent.    WSC to try to get meeting established with Harvard to discuss meds and other metadata.
+
+"
+35,11:28:30-06:00,wcampbel,comment,12,"Per Milissa Gerken:  I spoke with our CoPath interface programmer last week about the changes we are proposing for the synoptic interface. Unfortunately he determined that the two fields we want to add are not readily available to this interface. It will require some custom programming to add these. He will be putting together a quote for us and hopes to get that to me before the end of this week.
+
+ 
+
+We need quote from Copath to proceed."
+44,11:32:43-06:00,wcampbel,comment,4,discussed in ticket number #9
+44,11:32:59-06:00,wcampbel,status,assigned,closed
+44,11:32:59-06:00,wcampbel,resolution,,duplicate
+44,11:32:59-06:00,wcampbel,comment,5,
+29,11:43:23-06:00,wcampbel,comment,15,"WSC/JRC/JGP/Yesh to discuss.  Use of instance numbers to link grouped question/answer pairs (synoptic panel).
+
+Discuss this week.  WSC to send invite (pre-meeting WSC to send example reports)"
+19,11:53:05-06:00,wcampbel,comment,9,"JRC working on the MP manuscript.  Hopes to have rewrite sometime this week.
+
+WSC/JRC to Spring AMIA.  Present MP in context of RCR"
+40,11:54:39-06:00,wcampbel,comment,3,JRC working on module splits.  Added discussion to Observables call on 1/15/2018.
+32,11:57:14-06:00,wcampbel,comment,14,Yesh to get them file by end of week.  1/13/2018
+13,12:05:55-06:00,wcampbel,comment,17,"1.  Nick meeting with micro (Caitlin) to discuss data workflow in lab and calculation of antibiograms.
+
+2. Nick to ""look over shoulder"" this month to see actual process.
+
+3. WSC/JRC to confirm/construct map between Sunquest local terms and appropriate LOINC/SNOMED CT/RxNorm concepts for codification of Sunquest micro result messages.
+
+4.  WSC/NAS to discuss conversion of 2.1 messaging to support BD2K goals
+
+5.  PC and WSC to discuss RPS receiving 2.5.1 messaging and push to BD2K for current results"
+45,12:07:46-06:00,wcampbel,comment,2,NAS to work with Caitlin in Micro this month to establish current locational structure used by micro for antibiogram maintenance.  NAS to confirm that this matches current departmental structure (facility structure in EPIC)
+30,12:08:15-06:00,wcampbel,status,assigned,closed
+30,12:08:15-06:00,wcampbel,resolution,,fixed
+30,12:08:15-06:00,wcampbel,comment,7,
+9,09:51:36-06:00,campbell,comment,50,SCILHS metadata needs to be updated with RXNORM/NDC medications and LOINC lab ontologies we have developed.  Yesh to assure that all labs in enclosed 'UNMC_frequent_Labs' are exposed in the metadata refresh.
+9,09:53:00-06:00,campbell,cc,"campbell, wcampbel","campbell, wcampbel, yeshwanth.narayana@unmc.edu, jay.pedersen@unmc.edu"
+9,09:53:00-06:00,campbell,comment,51,
+35,11:04:48-06:00,wcampbel,comment,13,"Quote received and submitted.  Lab paid for it.
+
+SC needs timeline from Copath for implementation."
+45,11:08:04-06:00,nicholas.staffend,comment,3,"UNMC Antibiogram locations shown here: [http://intranet.nebraskamed.com/Nursing/HealthcareEpidemiology/UnitSpecificAntibiograms.aspx]
+
+"
+48,11:09:01-06:00,wcampbel,comment,5,"Jay just uploaded database backup for b2i to process.
+
+Turn around time from b2i???
+
+WSC/JRC to follow up with Rory at IHTSDO regarding their tooling and fitness for UNMC"
+9,11:17:12-06:00,wcampbel,comment,52,"Yesh to have completed lab items by tomorrow.
+Jay has meds done, but needs to bind to SCILHS root.  Jay/Yesh need access to operating system level to bind to SNOWSHRINE.  Need Mike Zeitz assistance.  Jay to correct modifier metadata by ingredient portion in SCHILHS
+
+WSC to contact Harvard-boys for a meeting.
+
+JRC to begin building ""how to"" for interoperable queries within SNOWSHRINE.  Share at hack-a-thon"
+9,11:19:01-06:00,wcampbel,comment,53,"Need to add icd-10-pcs or ICD-9-CM vol3.
+
+Jay would like to take a crack at it, but AFTER meds are complete"
+37,11:19:31-06:00,wcampbel,comment,11,No updates
+29,11:42:00-06:00,wcampbel,comment,16,"WSC to review sample HL7 message with synoptic data.
+
+WSC to get breast cancer report to JRC in similar format/report and structured data set
+
+Discussion of import to be done at rapid response meeting on 1/22/18.  Goal to complete before hack-a-thon"
+19,11:47:23-06:00,wcampbel,comment,10,"WSC to review AMP manuscript.
+
+Fall AMIA prep work to start.
+
+JRG/Bret - podium abstract, WSC - podium abstract for Spring March 12-15"
+49,11:53:48-06:00,wcampbel,comment,1,"Need to load synoptics and MP data into i2b2/CRANE AND SNOWSHRINE.
+
+JRC developing Guidelines for interop queries within SNOWSHRINE.
+
+JRC/WSC to develop agenda for presenation to dev team, WSC to prep for RCR Aim2
+
+JRC/WSC to mark up final report and show/model data from written form to encoded form in i2b2.  Source of truth for NLP work, as well."
+32,11:55:10-06:00,wcampbel,comment,15,Yesh to get this week.  Reload of i2b2 last week interrupted this last week.
+32,11:55:39-06:00,wcampbel,comment,16,Need to get refresh copy to Capricorn based on updated work on meds based on Jay's work.
+13,12:03:12-06:00,wcampbel,comment,18,"Nick Staffend met with Caitlin.  Caitlin sending 2016 antibiogram for comparison.
+
+WSC to talk to Curt Babbitt to get 2.5.1 feed sent to corepoint and forward to mirth."
+45,12:09:01-06:00,wcampbel,comment,4,NS/WSC to meet with Trevor Vanschooneveld to discuss how locations are used within NM to support antibiogram and antimicrobial stewardship
+20,12:15:06-06:00,wcampbel,comment,21,"PC moved test code into test system which uses bolt vs. apoc for reports.
+
+PC implemented using Jay's java plug-in (reports plug-in).  JPG to review PC's work (generated cypher).  Jay to do today.
+
+Jay installed APOC into test.
+
+PC fixed checkbox (inventory issue)"
+9,10:54:44-06:00,campbell,comment,54,"GUIDELINES FOR INTEROPERATION draft document developed (3 pages)
+WSC, JP, YN to please review and comments within 48 hours so that I may post t oGPC
+Jim C"
+49,10:54:48-06:00,campbell,priority,major,blocker
+49,10:54:48-06:00,campbell,comment,2,
+35,11:08:26-06:00,wcampbel,comment,14,"No change.  
+
+Thursday, meeting planned pending Copath interface mods.
+
+WSC to follow up with Milissa Gerken on timing."
+53,11:11:11-06:00,wcampbel,comment,1,"Jay installed update received today from B2I and restarted server.
+
+"
+53,11:11:20-06:00,wcampbel,status,new,closed
+53,11:11:20-06:00,wcampbel,resolution,,fixed
+53,11:11:20-06:00,wcampbel,comment,2,
+49,11:21:39-06:00,wcampbel,comment,3,"JRC developed guidelines for interop queries within SNOW SHRINE.  Loaded on GPC site.  Extend guideline document to include dissemination of MP data across network for GPC inclusion.  Discuss with Iowa.  WSC to schedule meeting for this week.
+
+WSC still to create update for RCR Aim 2 for presentation to PI's
+
+1. Yesh updates in observables.  JRC to review for correctness today.  If OK, Yesh to port over to SCILHS.
+
+2. Meds - UPdated modifier metadata for ingredients.  Looks good, JRC to do more validation
+
+3. Prob Lists - no issues
+
+4.  WSC working with dataZoek today after first review of marked up path report and mapping to SNOMED CT observables and results.
+
+"
+48,11:22:44-06:00,wcampbel,comment,6,First pass is complete.  JRC/WSC to review for correctness and to check with b2i regarding authoring in any particular module.
+50,11:24:05-06:00,wcampbel,comment,1,"JRC generated case list from NAACCR data and reid'd using EPIC.  WSC/CG reviewing this week and beginning chart reviews, etc."
+50,11:26:08-06:00,wcampbel,comment,2,"Apar Ganti reviewed data collection templates - suggested some adds/deletes.  Also provided full list of medications:
+\
+EGFR mAb: panitumumab, cetuximab. Zalutumumab (not available in the US outside of a clinical trial).
+
+BRAF inhibitors: vemurafenib, sorafenib, and dabrafenib. Sorafenib is not a BRAF inhibitor.
+
+Others: Regorafenib (Multiple tyrosine kinase inhibitor; does not need molecular testing).
+
+Immunotherapy: Pembrolizumab, nivolumab (for MSI-H patients).
+
+ 
+
+Data dictionary: I would also collect subsequent therapy; dates of subsequent therapy; response to targeted therapy.
+
+"
+37,11:28:22-06:00,wcampbel,comment,12,"WSC TT Cushman.  Still need to validation myeloid proliferation panel.
+
+WSC to meet with GO this afternoon re: interfaces.
+
+WSC, AC, Milissa and Molecular Lab met today to discuss orders/results interface between Copath and GO.  WSC/MG to follow up with MP staff regarding required data element for orders/results"
+51,11:32:42-06:00,wcampbel,comment,1,WSC/JRC need to review LRR vs. Sunquest LOINC mapping and reconciling differences.
+52,11:36:32-06:00,wcampbel,comment,1,"Harold would like to review python code generated by JGP for loading SNOMED from RF2.
+
+Need to establish attribution agreement.  WSC to follow up with UNeMED to register in open source and then share with Mayo."
+52,11:38:03-06:00,wcampbel,comment,2,WSC to follow up with UNEMED today.  And get estimate to HS re: when he can access the code.
+29,11:40:18-06:00,wcampbel,comment,17,"WSC still to review HL7 message and get message with report to Jim.
+
+Yesh to work on this week based on input from meeting with JRC and WSC last week."
+19,11:44:31-06:00,wcampbel,comment,11,"JRC - started abstract for observables in i2b2 (LOINC/SNOMED harmonization)
+JRC/WSC - MP paper in final review
+"
+40,11:45:46-06:00,wcampbel,comment,4,Review and discuss with Daniel Karlsson to determine next steps for NRC use
+28,11:46:48-06:00,wcampbel,comment,4,Meeting with Harvard next week to discuss and discrepancies in our metadata vs. current SCILHS.
+32,11:47:23-06:00,wcampbel,comment,17,Yesh 50% complete on rebuild of tables.  Next week will be completed.
+32,11:47:49-06:00,wcampbel,comment,18,"Hack-a-thon takes precedence, however."
+13,11:50:10-06:00,wcampbel,comment,19,"JRC to review Nick's auto encoding of organisms and meds.
+
+Nick to get Curt Babbitt IP and port info today for 2.5.1 message"
+45,11:51:48-06:00,wcampbel,comment,5,"Nick needs i2b2 access-JCM needs to add him.
+
+Nick will review and then discuss with JRC, Vanschooneveld and WSC how best to organize location ontology"
+45,13:08:12-06:00,campbell,comment,6,"Nick,
+I enclose spreadsheets with records from Clarity EAF (facility) and DEP (department) tables.  I pulled addresses into a separate worksheet expecting that we can use the geocoding software from Jay and Bret to get physical locations…we may have to do some work with Nebraska Medicine zip codes.  We  should discuss with Scott and Jim M if we want to extend to include individual bed location…I think probably so and we will use this data to restructure our bed history.
+ 
+My notion is that each node in the ontology would have defining elements of:
+-geocoded location (physical planetary address)
+-building identifier (co-location identifier for physical structures)
+-service area-revenue center/department id/bed identifier (enterprise management designation)
+(Trevor – do we want to include service personnel units?  Ie, indicator for units such as all beds that are served by common nursing personnel? This would primarily be department, but large units such as 5W might have two nursing staff pools)
+ 
+This would allow us to query antibiogram data by specimens obtained from patients by geographic domain, hospital unit or bed or originating from the same physical facility.
+Jim"
+45,08:46:37-06:00,campbell,comment,7,">>>
+Trevor vanSchoeneveld responded:
+To answer your question yes would like to have locations able to be pooled into single unit (think that is what you are asking).  For example 3rd floor ICU is actually 3 different locations per our lab but those locations are rather arbitrary and so would only use them as pooled location.  Verses 5th floor Clarkson where one portion of that floor is ICU step down, but rest is a believe med surg and there would want to separate as very different patients and nursing pools.  Overall your plan seems good.  The trick is always keeping up with changing hospital unit designations.  We had a number of new units created/renamed just in the last 4 months.  
+TV
+ "
+35,11:10:01-06:00,wcampbel,comment,15,"Copath has installed the upgraded/modified interface to use interface codes and support LRR requirements.  Milissa has sent message for Susan Griffith processing.  Not complete as of Thursday.
+
+WSC to follow up."
+49,11:20:11-06:00,wcampbel,comment,4,"SCILHS metadata available for SnowShrine
+
+Aquadata studio - for export of metadata for meds and observables
+
+
+
+CSV files for lab and meds to post for GPC use
+Load meds/lab metadata into UNMC spoke
+Populate with new observation facts
+
+JRC to run stats on use cases to support interop guidelines
+WSC to expand for mol path and synoptic data for PI meeting"
+48,11:24:35-06:00,wcampbel,comment,7,"QA looked good.
+
+SNAPSHOT to Mayo this week."
+48,11:24:47-06:00,wcampbel,status,accepted,closed
+48,11:24:47-06:00,wcampbel,resolution,,fixed
+48,11:24:47-06:00,wcampbel,comment,8,
+50,11:26:10-06:00,wcampbel,comment,3,JRC/WSC/CG met this morning.
+9,11:27:57-06:00,wcampbel,comment,55,JGP reviewing this morning.  Meeting with Harvard this afternoon.
+37,11:30:24-06:00,wcampbel,comment,13,"May move this forward earlier than lab test validation.
+
+"
+51,11:35:02-06:00,wcampbel,comment,2,"JRC discussing with David Cloyed, DC willing to assert that NM orders team will take responsibility for maintaining this LRR and setting up a data standards group to train and charge with maintenance of these tables."
+52,11:38:29-06:00,wcampbel,comment,3,"WSC to follow up with UNEMED per meetings on Friday
+
+WSC to email JRC and Mayo crew regarding next steps"
+29,11:45:57-06:00,wcampbel,comment,18,"HL7 messages not processing correctly into NE CARES. JGP and PC to review today.
+
+WSC to prep 1 case to for Yesh to load into i2b2 for hack a thon...just in case"
+13,11:48:34-06:00,wcampbel,comment,20,"Nick/JRC exchanging encoded lists for micro results.  NS to send to Jim later today.
+
+Nick finding outliers in meds and orgs.
+
+Nick to work on specimen sources."
+5,11:58:40-06:00,wcampbel,status,assigned,closed
+5,11:58:40-06:00,wcampbel,due_date,,
+5,11:58:40-06:00,wcampbel,resolution,,wontfix
+5,11:58:40-06:00,wcampbel,comment,6,
